@@ -53,6 +53,11 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 
 
+![A](/Check-Point/main.png)
+
+
+
+
 ![A](/Check-Point/model.png)
 
 
@@ -74,6 +79,11 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 
 ### GUI Design
+### .GUI mock-ups
+
+
+![A](/Check-Point/mk.png)
+
 
 
 ### Test Design

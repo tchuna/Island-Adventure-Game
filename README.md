@@ -13,7 +13,7 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 ## Index
 
 1. [Frameworks](#frameworks)
-2. [Design Patterns](#design patterns)
+2. [Design_Patterns](#design patterns)
 3. [Architecture Design](# architecture design)
 
 
@@ -26,7 +26,7 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 
 
-## Design Patterns
+## Design_Patterns
 
 ###### .Model View Controller    
 ###### .Strategy (temos diferentes iminigo no jogo que podem ter variadas açoes de acordo com a sua personalidade) 

@@ -14,7 +14,10 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 1. [Frameworks](#frameworks)
 2. [Design_Patterns](#design_patterns)
-3. [Architecture Design](# architecture design)
+3. [Architecture_Design](#architecture_design)
+4. [GUI_Design](#gui_design)
+5. [Test_Design](#test_design)
+
 
 
 
@@ -99,7 +102,7 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 
 
-### GUI Design
+## GUI_Design
 ### .GUI mock-ups
 
 
@@ -107,7 +110,7 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 
 
-### Test Design
+## Test_Design
 #### Alguns teste a serem implementados no  jogo 
 
 

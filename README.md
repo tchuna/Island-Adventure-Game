@@ -17,8 +17,6 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 
 
-
-
 ![A](/Check-Point/view.png)
 
 
@@ -28,7 +26,11 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 ## View State Diagram 
 
 
+
+
 ![A](/Check-Point/stateView.png)
+
+
 
 
 
@@ -38,7 +40,37 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 
 
+
+
 ![A](/Check-Point/gameSt.png)
+
+
+
+
+## Class Diagram
+
+
+
+
+
+![A](/Check-Point/model.png)
+
+
+
+
+
+
+![A](/Check-Point/View.png)
+
+
+
+
+
+![A](/Check-Point/controller.png)
+
+
+
+
 
 
 ### GUI Design

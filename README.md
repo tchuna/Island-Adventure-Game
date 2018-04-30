@@ -15,11 +15,19 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 ## Architecture Design
 
-### Logical View Diagam 
+
 
 
 
 ![A](/Check-Point/view.png)
+
+
+## View State Diagram 
+
+![A](/Check-Point/stateView.png)
+
+
+
 
 
 ### GUI Design

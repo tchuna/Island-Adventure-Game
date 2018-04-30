@@ -12,17 +12,14 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 ## Frameworks
 
-.LibGDX 
-.Android SDK
+.LibGDX           .Android SDK
 
 
 
 
 ## Design Patterns
 
-.Model View Controller 
-.Strategy
-.State
+.Model View Controller    .Strategy      .State
 
 
 ## Architecture Design

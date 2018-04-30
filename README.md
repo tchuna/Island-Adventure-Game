@@ -12,6 +12,19 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 ### Frameworks
 
+### Architecture Design
+
+##### Logical View Diagam 
+![A](/Check-Point/view.png)
+
+
+### GUI Design
+
+
+### Test Design
+
+
+
 
 
 

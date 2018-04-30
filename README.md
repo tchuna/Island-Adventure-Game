@@ -12,6 +12,18 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 ## Frameworks
 
+###### .LibGDX           
+###### .Android SDK
+
+
+
+
+## Design Patterns
+
+###### .Model View Controller    
+###### .Strategy      
+###### .State
+
 
 ## Architecture Design
 
@@ -87,6 +99,11 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 
 ### Test Design
+#### Alguns teste a serem implementados no  jogo 
+
+
+![A](/Check-Point/test.png)
+
 
 
 

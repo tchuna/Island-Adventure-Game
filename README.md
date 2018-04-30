@@ -22,12 +22,23 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 ![A](/Check-Point/view.png)
 
 
+
+
+
 ## View State Diagram 
+
 
 ![A](/Check-Point/stateView.png)
 
 
 
+
+
+## Game State Diagram
+
+
+
+![A](/Check-Point/gameSt.png)
 
 
 ### GUI Design

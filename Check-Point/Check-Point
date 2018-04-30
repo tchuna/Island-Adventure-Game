@@ -1,0 +1,26 @@
+     
+
+
+       Move IslandBOy (Esquerda,Direita)
+
+       Jump IslandBoy (jump)
+ 
+       Slide IslandBoy (slide)
+
+       Verificar se IslandBoys perde vida ao tocar em osbctaculos perigosos
+
+
+       Verificar se IslandBoys ganha vida ao tocar no item para incrementar vida
+
+
+       Verificar se IslandBoys  morre quando terminarem as suas vidas 
+
+       Vereificar se os inimigos morrem ao serem atingidos pelo "fireAttack" do IslanderBoy
+
+       Verificar se o IslandBoy vence o jogo 
+
+       Verificar se IslandBoy tem balas para executar o "attack" 
+
+       Verificar o estado  do IslandBoy 
+
+       

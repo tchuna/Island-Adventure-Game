@@ -103,6 +103,15 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 
 
 ## GUI_Design
+
+### .GUI (Screens)
+##### 1. MenuScren-> screen principal do jogo onde podemos encontrar algumas opçoes
+###### .Score Screen-> onde podemos ver alumas das melhores ponuaçoes do jogo 
+###### .Setting Screen
+
+
+
+
 ### .GUI mock-ups
 
 

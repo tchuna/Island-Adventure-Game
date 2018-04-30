@@ -105,9 +105,31 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 ## GUI_Design
 
 ### .GUI (Screens)
-##### 1. MenuScren-> screen principal do jogo onde podemos encontrar algumas opçoes
+
+##### 1. Menu Scren-> Screen principal do jogo onde podemos encontrar algumas opçoes
 ###### .Score Screen-> onde podemos ver alumas das melhores ponuaçoes do jogo 
-###### .Setting Screen
+###### .Setting Screen-> setting do jogo (desligar sounds do jogo etc..)
+
+##### 2. Select Scren-> Screen responsável pela escolha do personagem a jogar  
+
+##### 3. Play Scren-> Screen responsável pelo decorrer do jogo 
+###### .Pause Screen-> screen visualizado depois de pausar o jogo 
+
+##### 4. Game Over Scren
+
+##### 5. Win Scren
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -21,8 +21,9 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 ## Design Patterns
 
 ###### .Model View Controller    
-###### .Strategy      
-###### .State
+###### .Strategy (temos diferentes iminigo no jogo que podem ter variadas açoes de acordo com a sua personalidade) 
+###### .State (movimentos ue podem ser tomados pelo personagem preincipal (move,jump,attack,slide))
+
 
 
 ## Architecture Design

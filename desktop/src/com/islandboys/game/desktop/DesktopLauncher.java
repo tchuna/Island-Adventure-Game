@@ -9,6 +9,9 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width= 800;
 		config.height=480;
+		config.resizable = false;
+		config.title = "Adventures In Sal Island";
+
 		new LwjglApplication(new MGame(), config);
 	}
 }

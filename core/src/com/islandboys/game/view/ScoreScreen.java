@@ -18,7 +18,7 @@ public class ScoreScreen implements  Screen {
     public ScoreScreen(MGame game){
         this.game=game;
 
-        this.scoreBackground=new Texture("test.png");
+        this.scoreBackground=new Texture("test2.png");
 
         gamePort=new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         gamePort.apply();

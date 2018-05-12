@@ -28,12 +28,29 @@ public class MGame extends Game {
 
 	@Override
 	public void create () {
+		batch = new SpriteBatch();
 
 		this.menu=new MenuScreen(this);
+		this.playScreen=new PlayScreen(this);
 		this.scoreScreen=new ScoreScreen(this);
+		this.settingsScreen=new SettingsScreen(this);
 
-		batch = new SpriteBatch();
-		setScreen(scoreScreen);
+
+		setScreen(menu);
+
+	}
+
+
+
+	public void changeScreen(int option){
+
+		switch (option){
+			case 1 : setScreen(playScreen);break;
+			case 2 : setScreen(scoreScreen);break;
+			case 3 : setScreen(settingsScreen);break;
+			case 4 : setScreen(menu);break;
+		}
+
 
 	}
 

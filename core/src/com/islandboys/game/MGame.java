@@ -45,6 +45,8 @@ public class MGame extends Game {
 
 
 
+
+
 	public void changeScreen(int option){
 
 		switch (option){
@@ -53,6 +55,7 @@ public class MGame extends Game {
 			case 3 : setScreen(settingsScreen);break;
 			case 4 : setScreen(menu);break;
 			case 5 : setScreen(playScreen);break;
+			case 6 :System.out.println("thunaaa");
 		}
 
 

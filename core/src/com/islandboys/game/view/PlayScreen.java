@@ -3,11 +3,13 @@ package com.islandboys.game.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
+import com.islandboys.game.model.Hud;
 
 public class PlayScreen implements Screen {
 
@@ -16,15 +18,19 @@ public class PlayScreen implements Screen {
     private Texture settingsBackground;
     private Viewport gamePort;
     private Stage playStage;
+    private OrthographicCamera gameCamera;
     private MGame game;
+    private Hud hud;
 
     public PlayScreen(MGame game){
         this.game=game;
 
         this.settingsBackground=new Texture("test1.png");
-        gamePort=new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        gameCamera=new OrthographicCamera();
+        gamePort=new FitViewport(MGame.V_WIDTH,MGame. V_HEIGTH,gameCamera);
         gamePort.apply();
         playStage=new Stage(gamePort,game.batch);
+        hud=new Hud(game.batch);
     }
 
 
@@ -36,11 +42,13 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1,0,0,1);
+        Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.begin();
-        game.batch.draw(settingsBackground,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        game.batch.end();
+       // game.batch.begin();
+       // game.batch.draw(settingsBackground,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+       // game.batch.setProjectionMatrix(hud.hudStage.getCamera().combined);
+        hud.hudStage.draw();
+       // game.batch.end();
 
     }
 

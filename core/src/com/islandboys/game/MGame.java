@@ -21,6 +21,9 @@ public class MGame extends Game {
 
 	public SpriteBatch batch;
 	private MenuScreen menu ;
+	public static final int V_WIDTH=400;
+	public static final int V_HEIGTH=208;
+
 
 	private PlayScreen playScreen;
 	private ScoreScreen scoreScreen;

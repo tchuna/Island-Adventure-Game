@@ -6,27 +6,31 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.islandboys.game.MGame;
+
 
 
 public class ScoreScreen implements  Screen {
 
     private Texture scoreBackground;
-    Viewport  gamePort;
+    private Viewport  gamePort;
+    private Stage scoreStage;
     private MGame game;
 
     public ScoreScreen(MGame game){
         this.game=game;
 
         this.scoreBackground=new Texture("test2.png");
-
         gamePort=new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         gamePort.apply();
+        scoreStage=new Stage(gamePort,game.batch);
     }
 
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(scoreStage);
 
     }
 

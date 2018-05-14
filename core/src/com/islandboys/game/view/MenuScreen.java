@@ -109,11 +109,10 @@ public class MenuScreen implements Screen {
     }
 
 
-    public void setPlayScreen(){
+    public void setSelectcreen(){
         game.changeScreen(1);
 
     }
-
 
 
     public void inputListener(){
@@ -128,7 +127,7 @@ public class MenuScreen implements Screen {
         playB.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                setPlayScreen();
+                setSelectcreen();
 
             }
         });
@@ -168,7 +167,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(menuStage);
     }
 
     @Override
@@ -178,6 +177,7 @@ public class MenuScreen implements Screen {
         game.batch.begin();
         game.batch.draw(menuBackground,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         game.batch.end();
+       // menuStage.draw();
 
 
     }

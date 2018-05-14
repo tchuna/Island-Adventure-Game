@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.view.MenuScreen;
 import com.islandboys.game.view.PlayScreen;
 import com.islandboys.game.view.ScoreScreen;
+import com.islandboys.game.view.SelectScreen;
 import com.islandboys.game.view.SettingsScreen;
 import com.uwsoft.editor.renderer.SceneLoader;
 
@@ -24,6 +25,7 @@ public class MGame extends Game {
 	private PlayScreen playScreen;
 	private ScoreScreen scoreScreen;
 	private SettingsScreen settingsScreen;
+	private SelectScreen selectScreen;
 
 
 	@Override
@@ -34,6 +36,7 @@ public class MGame extends Game {
 		this.playScreen=new PlayScreen(this);
 		this.scoreScreen=new ScoreScreen(this);
 		this.settingsScreen=new SettingsScreen(this);
+		this.selectScreen=new SelectScreen(this);
 
 
 		setScreen(menu);
@@ -45,10 +48,11 @@ public class MGame extends Game {
 	public void changeScreen(int option){
 
 		switch (option){
-			case 1 : setScreen(playScreen);break;
+			case 1 : setScreen(selectScreen);break;
 			case 2 : setScreen(scoreScreen);break;
 			case 3 : setScreen(settingsScreen);break;
 			case 4 : setScreen(menu);break;
+			case 5 : setScreen(playScreen);break;
 		}
 
 
@@ -63,6 +67,11 @@ public class MGame extends Game {
 	@Override
 	public void resize(int width,int height){
 
+	}
+
+	@Override
+	public void dispose(){
+		super.dispose();
 	}
 
 }

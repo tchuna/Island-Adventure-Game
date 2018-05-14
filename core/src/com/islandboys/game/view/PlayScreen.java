@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
@@ -13,21 +14,23 @@ public class PlayScreen implements Screen {
 
 
     private Texture settingsBackground;
-    Viewport gamePort;
+    private Viewport gamePort;
+    private Stage playStage;
     private MGame game;
 
     public PlayScreen(MGame game){
         this.game=game;
 
         this.settingsBackground=new Texture("test1.png");
-
         gamePort=new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         gamePort.apply();
+        playStage=new Stage(gamePort,game.batch);
     }
 
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(playStage);
 
     }
 

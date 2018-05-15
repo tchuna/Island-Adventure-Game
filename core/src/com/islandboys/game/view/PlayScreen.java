@@ -47,7 +47,7 @@ public class PlayScreen implements Screen {
        // game.batch.begin();
        // game.batch.draw(settingsBackground,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
        // game.batch.setProjectionMatrix(hud.hudStage.getCamera().combined);
-        hud.hudStage.draw();
+        hud.draw();
        // game.batch.end();
 
     }

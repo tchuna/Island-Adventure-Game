@@ -1,69 +1,94 @@
 package com.islandboys.game.model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
 
-public class Hud  {
+public class Hud extends Stage {
 
     public Stage hudStage;
     private Viewport gamePort;
     private OrthographicCamera camera;
     private Table table;
-
-    private Integer worldTimer;
-    private float timeCount;
-    private int score;
+    private SpriteBatch batch;
 
 
+    private Image scoreFruts;
+    private Image pauseButton;
+    private Array<Texture>liveLevel;
 
-    Label countdownLabel;
+
+    private Integer worldTimer=300;
+    private float timeCount=0;
+    private int score=0;
+    private int live=4;
+
+
     Label scoreLabel;
     Label timeLabel;
-    Label levelLabel;
-    Label islanderBoyLabel;
-    Label worldLabel;
 
     public Hud(SpriteBatch batch){
-        worldTimer=300;
-        timeCount=0;
-        score=0;
         camera=new OrthographicCamera();
         gamePort=new FitViewport(MGame.V_WIDTH,MGame. V_HEIGTH,camera);
         hudStage=new Stage(gamePort,batch);
         table=new Table();
+        this.batch=batch;
+
+        loadLiveLevel();
+        setupHud();
+
+    }
+
+
+
+    public void setupHud(){
         table.top();
         table.setFillParent(true);
-
-        countdownLabel=new Label(String.format("%03d",worldTimer),new Label.LabelStyle(new BitmapFont(), Color.CYAN));
-        scoreLabel=new Label(String.format("%06d",score),new Label.LabelStyle(new BitmapFont(), Color.CYAN));
+        scoreLabel=new Label(String.format("%03d",score),new Label.LabelStyle(new BitmapFont(), Color.CYAN));
         timeLabel=new Label("TIME",new Label.LabelStyle(new BitmapFont(), Color.CYAN));
-        levelLabel=new Label("1-1",new Label.LabelStyle(new BitmapFont(), Color.CYAN));
-        islanderBoyLabel=new Label("Islander",new Label.LabelStyle(new BitmapFont(), Color.CYAN));
-        worldLabel=new Label("world",new Label.LabelStyle(new BitmapFont(), Color.CYAN));
-
-
-        table.add(islanderBoyLabel).expandX().padTop(5);
-        table.add(worldLabel).expandX().padTop(5);
+        table.add(scoreLabel).expandX().padTop(5);
         table.add(timeLabel).expandX().padTop(5);
         table.row();
-        table.add(scoreLabel).expandX();
-        table.add(levelLabel).expandX();
-        table.add(countdownLabel).expandX();
 
         hudStage.addActor(table);
 
 
+    }
 
 
+    public void loadLiveLevel(){
+        liveLevel=new Array<Texture>();
+        liveLevel.add(new Texture("liveLevel_4.png"));
+        liveLevel.add(new Texture("liveLevel_3.png"));
+        liveLevel.add(new Texture("liveLevel_2.png"));
+        liveLevel.add(new Texture("liveLevel_1.png"));
+        liveLevel.add(new Texture("liveLevel_0.png"));
+
+    }
+
+
+
+    @Override
+
+    public void draw(){
+        super.draw();
+        batch.begin();
+
+        batch.draw(liveLevel.get(4),0, Gdx.graphics.getHeight()- 150,233,100);
+        batch.end();
 
 
     }
+
 }

@@ -30,7 +30,7 @@ public class PlayScreen implements Screen {
         gamePort=new FitViewport(MGame.V_WIDTH,MGame. V_HEIGTH,gameCamera);
         gamePort.apply();
         playStage=new Stage(gamePort,game.batch);
-        hud=new Hud(game.batch);
+        hud=new Hud(game.batch,MGame.ISLANDER_3);
     }
 
 
@@ -44,11 +44,14 @@ public class PlayScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-       // game.batch.begin();
-       // game.batch.draw(settingsBackground,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-       // game.batch.setProjectionMatrix(hud.hudStage.getCamera().combined);
+        game.batch.begin();
+        game.batch.end();
+
         hud.draw();
-       // game.batch.end();
+        //game.batch.setProjectionMatrix(hud.hudStage.getCamera().combined);
+        hud.hudStage.draw();
+
+
 
     }
 

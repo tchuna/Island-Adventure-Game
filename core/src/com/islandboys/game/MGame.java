@@ -23,6 +23,10 @@ public class MGame extends Game {
 	private MenuScreen menu ;
 	public static final int V_WIDTH=400;
 	public static final int V_HEIGTH=208;
+	public static final int ISLANDER_1=1;
+	public static final int ISLANDER_2=2;
+	public static final int ISLANDER_3=3;
+
 
 
 	private PlayScreen playScreen;

@@ -21,13 +21,6 @@ public class MGame extends Game {
 
 	public SpriteBatch batch;
 	private MenuScreen menu ;
-	public static final int V_WIDTH=400;
-	public static final int V_HEIGTH=208;
-	public static final int ISLANDER_1=1;
-	public static final int ISLANDER_2=2;
-	public static final int ISLANDER_3=3;
-
-
 
 	private PlayScreen playScreen;
 	private ScoreScreen scoreScreen;
@@ -39,14 +32,14 @@ public class MGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 
-		this.menu=new MenuScreen(this);
+		//this.menu=new MenuScreen(this);
+		//this.scoreScreen=new ScoreScreen(this);
+		//this.settingsScreen=new SettingsScreen(this);
+		//this.selectScreen=new SelectScreen(this);
 		this.playScreen=new PlayScreen(this);
-		this.scoreScreen=new ScoreScreen(this);
-		this.settingsScreen=new SettingsScreen(this);
-		this.selectScreen=new SelectScreen(this);
 
 
-		setScreen(menu);
+		setScreen(playScreen);
 
 	}
 

@@ -64,7 +64,7 @@ public class PlayScreen implements Screen{
         world=new World(new Vector2(0,-10),true);
         box2DDebugRenderer=new Box2DDebugRenderer();
         worldCreator=new Box2DWorldCreator(world,map);
-        islander=new Islander(world);
+        islander=new Islander(world,this);
 
 
 
@@ -102,6 +102,7 @@ public class PlayScreen implements Screen{
     public void update(float delta){
 
         handleInput(delta);
+        islander.update(delta);
 
         world.step(1/60f,6,2);
         gamecam.position.x=islander.body.getPosition().x;
@@ -125,9 +126,12 @@ public class PlayScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-
         box2DDebugRenderer.render(world,gamecam.combined);
+
         game.batch.setProjectionMatrix(gamecam.combined);
+        game.batch.begin();
+        islander.draw(game.batch);
+        game.batch.end();
 
         game.batch.setProjectionMatrix(hudgame.hudStage.getCamera().combined);
         hudgame.hudStage.draw();

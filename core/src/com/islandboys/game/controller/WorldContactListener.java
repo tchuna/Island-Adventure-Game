@@ -6,7 +6,10 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.islandboys.game.model.Coins;
+import com.islandboys.game.model.GameInfo;
 import com.islandboys.game.model.InteractiveTileObject;
+import com.islandboys.game.model.Islander;
 
 public class WorldContactListener implements ContactListener {
 
@@ -92,10 +95,30 @@ public class WorldContactListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        headContact(contact);
-        footContact(contact);
-        fbodyContact(contact);
+         headContact(contact);
+         footContact(contact);
+         fbodyContact(contact);
          bbodyContact(contact);
+
+       /* Fixture fixtureA = contact.getFixtureA();
+        Fixture fixtureB = contact.getFixtureB();
+
+        int typeOfCollision = fixtureA.getFilterData().categoryBits | fixtureB.getFilterData().categoryBits;
+
+
+        switch (typeOfCollision) {
+
+
+        case GameInfo.ISLANDER_BIT | GameInfo.COINS_BIT:
+        if (fixtureA.getFilterData().categoryBits == GameInfo.ISLANDER_BIT  && fixtureB.getFilterData().categoryBits ==GameInfo.COINS_BIT) {
+           // ((Islander) fixtureA.getUserData()).incNumberOfCarrots();
+            ((Coins)fixtureB.getUserData()).onHeadHit();
+        } else {
+            //((Islander) fixtureB.getUserData()).incNumberOfCarrots();
+            ((Coins)fixtureA.getUserData()).onHeadHit();
+        }
+        break;
+        }*/
 
 
     }

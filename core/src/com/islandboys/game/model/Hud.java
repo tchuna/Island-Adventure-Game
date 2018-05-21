@@ -26,13 +26,14 @@ public class Hud extends Stage {
     private Array<Texture>liveLevel;
     private Texture scoreCoin_T,weapon_T,time_T,islander_T;
 
-    private int timeCount=0;
-    private int score=4;
+    private float timeCount=0;
+    private static int score=0;
     private int live=0;
     private int weapon=5;
+    private int worldTime=0;
 
 
-    Label scoreLabel;
+    private static Label scoreLabel;
     Label timeLabel;
     Label weaponLabel;
 
@@ -55,6 +56,19 @@ public class Hud extends Stage {
 
 
 
+    public void update(float delta){
+        timeCount+=delta;
+        if(timeCount>=1){
+            worldTime++;
+            timeLabel.setText(String.format("%03d",worldTime));
+
+            timeCount=0;
+        }
+
+
+    }
+
+
     public void setupHudLabels(){
 
         scoreLabel=new Label(String.format("%03d",score),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
@@ -67,7 +81,7 @@ public class Hud extends Stage {
         weaponLabel.setBounds(Gdx.graphics.getWidth()*625/1000,Gdx.graphics.getHeight()*838/1000,Gdx.graphics.getWidth()*125/1000,Gdx.graphics.getHeight()*209/1000);
 
 
-        timeLabel=new Label(String.format("%03d",timeCount),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        timeLabel=new Label(String.format("%03d",worldTime),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         timeLabel.setFontScale(2f);
         timeLabel.setBounds(Gdx.graphics.getWidth()*829/1000,Gdx.graphics.getHeight()*838/1000,Gdx.graphics.getWidth()*125/1000,Gdx.graphics.getHeight()*209/1000);
 
@@ -94,9 +108,12 @@ public class Hud extends Stage {
         this.live=live;
 
     }
-    public void setScore(int score){
-        this.score=score;
+    public static void  setScore(int v){
+
+        score+=v;
+        scoreLabel.setText(String.format("%03d",score));
     }
+
     public void numWeapon(int weapon){
         this.weapon=weapon;
 

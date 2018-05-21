@@ -8,6 +8,7 @@ public class Spike extends InteractiveTileObject {
     public Spike(World world, TiledMap map, com.badlogic.gdx.math.Rectangle rect){
         super(world,map,rect);
         fixture.setUserData(this);
+        setCategoryFilter(GameInfo.SPIKE_BIT);
 
     }
 

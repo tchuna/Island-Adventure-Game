@@ -2,6 +2,7 @@ package com.islandboys.game.model;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Filter;
@@ -52,6 +53,28 @@ public abstract class InteractiveTileObject {
 
 
     }
+
+    public TiledMapTileLayer.Cell getCell(){
+
+        TiledMapTileLayer layer=(TiledMapTileLayer) map.getLayers().get(1);
+
+        return layer.getCell((int)(body.getPosition().x*GameInfo.PIXEL_METER/16),
+                (int)(body.getPosition().y*GameInfo.PIXEL_METER/16));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

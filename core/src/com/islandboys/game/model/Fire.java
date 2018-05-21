@@ -9,6 +9,7 @@ public class Fire extends  InteractiveTileObject {
     public Fire(World world, TiledMap map, com.badlogic.gdx.math.Rectangle rect){
         super(world,map,rect);
         fixture.setUserData(this);
+        setCategoryFilter(GameInfo.FIRE_BIT);
 
     }
 

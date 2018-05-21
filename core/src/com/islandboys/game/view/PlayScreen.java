@@ -110,6 +110,9 @@ public class PlayScreen implements Screen{
         islander.update(delta);
 
         world.step(1/60f,6,2);
+        islander.update(delta);
+        hudgame.update(delta);
+
         gamecam.position.x=islander.body.getPosition().x;
 
         gamecam.update();

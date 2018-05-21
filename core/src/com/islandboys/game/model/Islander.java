@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.islandboys.game.view.PlayScreen;
@@ -75,9 +76,9 @@ public class Islander extends Sprite {
 
 
         for(int i=0;i<8;i++){
-            frames.add(new TextureRegion(running,i*25,0,25,36));
+            frames.add(new TextureRegion(running,i*25,-3,25,36));
         }
-        islanderRunning=new Animation(0.1f,frames);
+        islanderRunning=new Animation(0.14f,frames);
         frames.clear();
 
 
@@ -147,7 +148,7 @@ public class Islander extends Sprite {
     }
 
     public void update(float delta){
-        setPosition(body.getPosition().x-getWidth()/2.1f,(body.getPosition().y-getHeight()/3));
+        setPosition(body.getPosition().x-getWidth()/2,(body.getPosition().y-getHeight()/2));
         setRegion(getFrames(delta));
 
     }
@@ -173,37 +174,40 @@ public class Islander extends Sprite {
 
         FixtureDef fdef=new FixtureDef();
 
-        CircleShape shape= new CircleShape();
-        shape.setRadius(10/GameInfo.PIXEL_METER);
+       // CircleShape shape= new CircleShape();
+        //shape.setRadius(10/GameInfo.PIXEL_METER);
+        PolygonShape shape=new PolygonShape();
+        shape.setAsBox(11/GameInfo.PIXEL_METER,16.5f/GameInfo.PIXEL_METER);
 
         fdef.filter.categoryBits=GameInfo.ISLANDER_BIT;
-        fdef.filter.maskBits=GameInfo.DEFAULT_BIT|GameInfo.BRICKS_BIT|GameInfo.COINS_BIT;
+
+        fdef.filter.maskBits=GameInfo.BRICKS_BIT|GameInfo.COINS_BIT|GameInfo.FIRE_BIT|GameInfo.SPIKE_BIT|GameInfo.DEFAULT_BIT;
 
         fdef.shape=shape;
         body.createFixture(fdef);
 
         EdgeShape head=new EdgeShape();
-        head.set(new Vector2(-9/GameInfo.PIXEL_METER,23/GameInfo.PIXEL_METER),new Vector2(9/GameInfo.PIXEL_METER,23/GameInfo.PIXEL_METER));
+        head.set(new Vector2(-11/GameInfo.PIXEL_METER,17/GameInfo.PIXEL_METER),new Vector2(11/GameInfo.PIXEL_METER,17/GameInfo.PIXEL_METER));
         fdef.shape=head;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("head");
 
 
         EdgeShape foot=new EdgeShape();
-        foot.set(new Vector2(-9/GameInfo.PIXEL_METER,-11/GameInfo.PIXEL_METER),new Vector2(9/GameInfo.PIXEL_METER,-11/GameInfo.PIXEL_METER));
+        foot.set(new Vector2(-11/GameInfo.PIXEL_METER,-17/GameInfo.PIXEL_METER),new Vector2(11/GameInfo.PIXEL_METER,-17/GameInfo.PIXEL_METER));
         fdef.shape=foot;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("foot");
 
         EdgeShape fbody=new EdgeShape();
-        fbody.set(new Vector2(11/GameInfo.PIXEL_METER,-8/GameInfo.PIXEL_METER),new Vector2(11/GameInfo.PIXEL_METER,8/GameInfo.PIXEL_METER));
+        fbody.set(new Vector2(12/GameInfo.PIXEL_METER,-15/GameInfo.PIXEL_METER),new Vector2(12/GameInfo.PIXEL_METER,15/GameInfo.PIXEL_METER));
         fdef.shape=fbody;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("fbody");
 
 
         EdgeShape bbody=new EdgeShape();
-        bbody.set(new Vector2(-11/GameInfo.PIXEL_METER,-8/GameInfo.PIXEL_METER),new Vector2(-11/GameInfo.PIXEL_METER,8/GameInfo.PIXEL_METER));
+        bbody.set(new Vector2(-12/GameInfo.PIXEL_METER,-15/GameInfo.PIXEL_METER),new Vector2(-12/GameInfo.PIXEL_METER,15/GameInfo.PIXEL_METER));
         fdef.shape=bbody;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("bbody");

@@ -11,6 +11,7 @@ public class Coins extends InteractiveTileObject {
         setCategoryFilter(GameInfo.COINS_BIT);
 
 
+
     }
 
 
@@ -19,7 +20,29 @@ public class Coins extends InteractiveTileObject {
     public void onHeadHit() {
         Gdx.app.log("Coins","Coins");
         setCategoryFilter(GameInfo.DESTROED_BIT);
-
+        Hud.setScore(1);
+        getCell().setTile(null);
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

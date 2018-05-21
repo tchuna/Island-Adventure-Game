@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
 import com.islandboys.game.controller.Box2DWorldCreator;
+import com.islandboys.game.controller.WorldContactListener;
 import com.islandboys.game.model.GameInfo;
 import com.islandboys.game.model.Hud;
 import com.islandboys.game.model.Islander;
@@ -46,6 +47,7 @@ public class PlayScreen implements Screen{
     private World world;
     private Box2DDebugRenderer box2DDebugRenderer;
     private Islander islander;
+    private WorldContactListener contacListener;
 
 
     public PlayScreen(MGame game){
@@ -65,6 +67,9 @@ public class PlayScreen implements Screen{
         box2DDebugRenderer=new Box2DDebugRenderer();
         worldCreator=new Box2DWorldCreator(world,map);
         islander=new Islander(world,this);
+        contacListener=new WorldContactListener();
+
+        world.setContactListener(contacListener);
 
 
 

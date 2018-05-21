@@ -1,5 +1,6 @@
 package com.islandboys.game.controller;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -17,6 +18,9 @@ import com.islandboys.game.model.Spike;
 
 public class Box2DWorldCreator {
 
+
+
+
     public Box2DWorldCreator(World world, TiledMap map) {
         CreatGroundBod(world,map);
         createBodys(world,map);
@@ -32,7 +36,7 @@ public class Box2DWorldCreator {
         Body body;
 
         //ground bdx
-        for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(GameInfo.GROUND).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -52,14 +56,14 @@ public class Box2DWorldCreator {
     public void createBodys(World world, TiledMap map) {
 
         //bricks bdx
-        for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(GameInfo.BRICKS).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Bricks(world,map,rect);
 
         }
 
         //spikes bdx
-        for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(GameInfo.SPIKE).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new Spike(world,map,rect);
@@ -67,7 +71,7 @@ public class Box2DWorldCreator {
         }
 
         //fire bdx
-        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(GameInfo.FIRE).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             new Fire(world,map,rect);
@@ -75,7 +79,7 @@ public class Box2DWorldCreator {
         }
 
         //coins bdx
-        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(GameInfo.COINS).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Coins(world, map, rect);
 

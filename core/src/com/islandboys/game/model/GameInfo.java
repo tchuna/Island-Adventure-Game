@@ -30,7 +30,19 @@ public class GameInfo implements Disposable {
     public static final int ISLANDER_2=2;
     public static final int ISLANDER_3=3;
 
-    private static Texture bunnyStartImage;
+    public static final int GROUND=2;
+    public static final int BRICKS=3;
+    public static final int SPIKE=4;
+    public static final int FIRE=5;
+    public static final int COINS=6;
+
+    public static final short DEFAULT_BIT=1;
+    public static final short ISLANDER_BIT=2;
+    public static final short BRICKS_BIT=4;
+    public static final short COINS_BIT=8;
+    public static final short DESTROED_BIT=16;
+
+
 
 
 

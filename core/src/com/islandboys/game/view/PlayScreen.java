@@ -93,7 +93,7 @@ public class PlayScreen implements Screen{
 
 
 
-    public void toucInput(){
+    public void toucInput(float delta){
 
 
 
@@ -137,8 +137,8 @@ public class PlayScreen implements Screen{
     public void update(float delta){
 
 
-        handleInput(delta);
-        toucInput();
+        //handleInput(delta);
+        toucInput(delta);
         //
         islander.update(delta);
 
@@ -182,6 +182,8 @@ public class PlayScreen implements Screen{
             control.draw();
         }
 
+        control.draw();
+
 
 
 
@@ -193,6 +195,7 @@ public class PlayScreen implements Screen{
     public void resize(int width, int height) {
         stage.getViewport().update(width, height,    true);
         hudgame.hudStage.getViewport().update(width, height);
+        control.resize(width,height);
         // gamePort.update(width,height);
 
     }

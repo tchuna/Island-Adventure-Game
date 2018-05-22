@@ -22,6 +22,11 @@ public class GameInfo implements Disposable {
     public static final int WIDTH=800;
     public static final int HEIGHT=480;
 
+
+ public static final int C_WIDTH=500;
+ public static final int C_HEIGHT=300;
+
+
     public static final int V_WIDTH=400;
     public static final int V_HEIGHT=208;
     public static final float PIXEL_METER=85;

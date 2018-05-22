@@ -23,7 +23,7 @@ public class Controller {
 
     public Controller(){
         cam = new OrthographicCamera();
-        viewport = new FitViewport(550, 300, cam);
+        viewport = new FitViewport(GameInfo.C_WIDTH,GameInfo.C_HEIGHT, cam);
         stage = new Stage(viewport, MGame.batch);
 
         stage.addListener(new InputListener(){
@@ -136,19 +136,16 @@ public class Controller {
             }
         });
 
-        table.add();
-        table.add(upImg).size(upImg.getWidth(), upImg.getHeight());
-        table.add();
-        table.row().pad(5, 5, 5, 5);
-        table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight());
-        table.add();
-        table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight());
-        table.row().padBottom(5);
-        table.add();
-        table.add(downImg).size(downImg.getWidth(), downImg.getHeight());
-        table.add();
 
-        stage.addActor(table);
+        leftImg.setBounds(0,70,leftImg.getWidth(),leftImg.getHeight());
+        rightImg.setBounds(90,70,rightImg.getWidth(),rightImg.getHeight());
+
+        upImg.setBounds(445,70,upImg.getWidth(),upImg.getHeight());
+
+        stage.addActor(leftImg);
+        stage.addActor(rightImg);
+        stage.addActor(upImg);
+
     }
 
     public void draw(){

@@ -3,6 +3,8 @@ package com.islandboys.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,13 +21,16 @@ import java.awt.Menu;
 
 public class MGame extends Game {
 
-	public SpriteBatch batch;
+	public static SpriteBatch batch;
 	private MenuScreen menu ;
 
 	private PlayScreen playScreen;
 	private ScoreScreen scoreScreen;
 	private SettingsScreen settingsScreen;
 	private SelectScreen selectScreen;
+
+	public static AssetManager assetManager;
+	private boolean sontOn;
 
 
 	@Override
@@ -36,6 +41,12 @@ public class MGame extends Game {
 		//this.scoreScreen=new ScoreScreen(this);
 		//this.settingsScreen=new SettingsScreen(this);
 		//this.selectScreen=new SelectScreen(this);
+
+		assetManager=new AssetManager();
+		assetManager.load("song.wav", Music.class);
+		assetManager.finishLoading();
+		this.sontOn=true;
+
 		this.playScreen=new PlayScreen(this);
 
 

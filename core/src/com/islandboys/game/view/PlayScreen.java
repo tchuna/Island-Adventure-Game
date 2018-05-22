@@ -1,9 +1,11 @@
 package com.islandboys.game.view;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,6 +30,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
 import com.islandboys.game.controller.Box2DWorldCreator;
 import com.islandboys.game.controller.WorldContactListener;
+import com.islandboys.game.model.Controller;
 import com.islandboys.game.model.GameInfo;
 import com.islandboys.game.model.Hud;
 import com.islandboys.game.model.Islander;
@@ -49,6 +52,10 @@ public class PlayScreen implements Screen{
     private Islander islander;
     private WorldContactListener contacListener;
 
+    private Music music;
+
+    private Controller control;
+
 
     public PlayScreen(MGame game){
         this.game=game;
@@ -65,12 +72,18 @@ public class PlayScreen implements Screen{
 
         world=new World(new Vector2(0,-10),true);
         box2DDebugRenderer=new Box2DDebugRenderer();
-        worldCreator=new Box2DWorldCreator(world,map);
+        worldCreator=new Box2DWorldCreator(world,map,hudgame);
         islander=new Islander(world,this);
         contacListener=new WorldContactListener();
 
         world.setContactListener(contacListener);
 
+
+        music= game.assetManager.get("song.wav",Music.class);
+        music.setLooping(true);
+        music.play();
+
+        this.control=new Controller();
 
 
 
@@ -80,25 +93,42 @@ public class PlayScreen implements Screen{
 
 
 
+    public void toucInput(){
+
+
+
+        if(control.isRightPressed())
+            islander.body.setLinearVelocity(new Vector2(2, islander.body.getLinearVelocity().y));
+        else if (control.isLeftPressed())
+            islander.body.setLinearVelocity(new Vector2(-2, islander.body.getLinearVelocity().y));
+        else
+            islander.body.setLinearVelocity(new Vector2(0, islander.body.getLinearVelocity().y));
+        if (control.isUpPressed() && islander.body.getLinearVelocity().y == 0)
+            islander.body.applyLinearImpulse(new Vector2(0, 4f), islander.body.getWorldCenter(), true);
+
+
+    }
+
 
     public void handleInput(float delta){
 
-        if(Gdx.input.isTouched()){
-            islander.body.applyLinearImpulse(new Vector2(0.1f,0),islander.body.getWorldCenter(),true);
-        }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            islander.body.applyLinearImpulse(new Vector2(0,4f),islander.body.getWorldCenter(),true);
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) &&  islander.body.getLinearVelocity().y == 0){
+                islander.body.applyLinearImpulse(new Vector2(0,4f),islander.body.getWorldCenter(),true);
+
+
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && islander.body.getLinearVelocity().x<=2){
-            islander.body.applyLinearImpulse(new Vector2(0.1f,0),islander.body.getWorldCenter(),true);
+            islander.body.applyLinearImpulse(new Vector2(0.4f,0),islander.body.getWorldCenter(),true);
         }
 
 
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && islander.body.getLinearVelocity().x>=-2){
-            islander.body.applyLinearImpulse(new Vector2(-0.1f,0),islander.body.getWorldCenter(),true);
+            islander.body.applyLinearImpulse(new Vector2(-0.4f,0),islander.body.getWorldCenter(),true);
         }
+
 
 
 
@@ -106,7 +136,10 @@ public class PlayScreen implements Screen{
     }
     public void update(float delta){
 
+
         handleInput(delta);
+        toucInput();
+        //
         islander.update(delta);
 
         world.step(1/60f,6,2);
@@ -144,6 +177,13 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix(hudgame.hudStage.getCamera().combined);
         hudgame.hudStage.draw();
         hudgame.draw();
+
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            control.draw();
+        }
+
+
+
 
 
 

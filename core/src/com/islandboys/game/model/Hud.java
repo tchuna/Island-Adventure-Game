@@ -43,7 +43,7 @@ public class Hud extends Stage {
         gamePort=new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),camera);
         hudStage=new Stage(gamePort,batch);
         scoreCoin_T=new Texture("scoreCoin.png");
-        weapon_T=new Texture("weapon.png");
+        weapon_T=new Texture("arrow.png");
         time_T=new Texture("time.png");
 
         setupHudLabels();
@@ -143,7 +143,7 @@ public class Hud extends Stage {
         batch.draw(liveLevel.get(live),Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*95/100), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*13.6f/100),Gdx.graphics.getWidth()*25/100,Gdx.graphics.getHeight()*13.6f/100);
         batch.draw(islander_T,Gdx.graphics.getWidth()*7/1000, Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*105/1000),Gdx.graphics.getWidth()*56/1000,Gdx.graphics.getHeight()*94/1000);
         batch.draw(scoreCoin_T,Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*688/1000), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*11/100),Gdx.graphics.getWidth()*52/1000,Gdx.graphics.getHeight()*94/1000);
-        batch.draw(weapon_T,Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*438/1000), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*1125/10000),Gdx.graphics.getWidth()*525/10000,Gdx.graphics.getHeight()*104/1000);
+        batch.draw(weapon_T,Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*475/1000), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*1615/10000),Gdx.graphics.getWidth()*900/10000,Gdx.graphics.getHeight()*200/1000);
         batch.draw(time_T,Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*240/1000), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*121/1000),Gdx.graphics.getWidth()*69/1000,Gdx.graphics.getHeight()*125/1000);
         batch.end();
 

@@ -5,8 +5,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Coins extends InteractiveTileObject {
-    public Coins(World world, TiledMap map, com.badlogic.gdx.math.Rectangle rect){
+    protected Hud hud;
+    public Coins(World world, TiledMap map, com.badlogic.gdx.math.Rectangle rect,Hud hud){
         super(world,map,rect);
+        this.hud=hud;
         fixture.setUserData(this);
         setCategoryFilter(GameInfo.COINS_BIT);
 
@@ -20,7 +22,7 @@ public class Coins extends InteractiveTileObject {
     public void onHeadHit() {
         Gdx.app.log("Coins","Coins");
         setCategoryFilter(GameInfo.DESTROED_BIT);
-        Hud.setScore(1);
+        hud.setScore(1);
         getCell().setTile(null);
 
     }

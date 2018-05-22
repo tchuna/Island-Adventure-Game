@@ -14,14 +14,15 @@ import com.islandboys.game.model.Bricks;
 import com.islandboys.game.model.Coins;
 import com.islandboys.game.model.Fire;
 import com.islandboys.game.model.GameInfo;
+import com.islandboys.game.model.Hud;
 import com.islandboys.game.model.Spike;
 
 public class Box2DWorldCreator {
 
+    protected  Hud hud;
 
-
-
-    public Box2DWorldCreator(World world, TiledMap map) {
+    public Box2DWorldCreator(World world, TiledMap map, Hud hud) {
+        this.hud=hud;
         CreatGroundBod(world,map);
         createBodys(world,map);
 
@@ -81,7 +82,7 @@ public class Box2DWorldCreator {
         //coins bdx
         for (MapObject object : map.getLayers().get(GameInfo.COINS).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Coins(world, map, rect);
+            new Coins(world, map, rect,hud);
 
         }
 

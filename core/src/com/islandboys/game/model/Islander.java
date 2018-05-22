@@ -39,6 +39,7 @@ public class Islander extends Sprite {
 
     private float stateTimer;
     private boolean directionRigh;
+    public  boolean isInAir;
 
 
 
@@ -47,7 +48,7 @@ public class Islander extends Sprite {
         this.world =world;
 
         idle=new Texture("idle.png");
-        running=new Texture("r.png");
+        running=new Texture("runing.png");
         jump=new Texture("jump.png");
         fail=new Texture("failling.png");
 
@@ -75,23 +76,23 @@ public class Islander extends Sprite {
         frames.clear();
 
 
-        for(int i=0;i<8;i++){
+        for(int i=0;i<4;i++){
             frames.add(new TextureRegion(running,i*25,-3,25,36));
         }
-        islanderRunning=new Animation(0.14f,frames);
+        islanderRunning=new Animation(0.2f,frames);
         frames.clear();
 
 
         for(int i=0;i<4;i++){
             frames.add(new TextureRegion(jump,i*26,0,26,36));
         }
-        islanderJump=new Animation(0.1f,frames);
+        islanderJump=new Animation(0.3f,frames);
         frames.clear();
 
         for(int i=0;i<2;i++){
             frames.add(new TextureRegion(fail,i*25,0,25,36));
         }
-        islanderFailng=new Animation(0.1f,frames);
+        islanderFailng=new Animation(0.2f,frames);
         frames.clear();
 
         setBounds(0,0,25/GameInfo.PIXEL_METER,36/GameInfo.PIXEL_METER);
@@ -177,7 +178,7 @@ public class Islander extends Sprite {
        // CircleShape shape= new CircleShape();
         //shape.setRadius(10/GameInfo.PIXEL_METER);
         PolygonShape shape=new PolygonShape();
-        shape.setAsBox(11/GameInfo.PIXEL_METER,16.5f/GameInfo.PIXEL_METER);
+        shape.setAsBox(6/GameInfo.PIXEL_METER,16.5f/GameInfo.PIXEL_METER);
 
         fdef.filter.categoryBits=GameInfo.ISLANDER_BIT;
 
@@ -187,20 +188,20 @@ public class Islander extends Sprite {
         body.createFixture(fdef);
 
         EdgeShape head=new EdgeShape();
-        head.set(new Vector2(-11/GameInfo.PIXEL_METER,17/GameInfo.PIXEL_METER),new Vector2(11/GameInfo.PIXEL_METER,17/GameInfo.PIXEL_METER));
+        head.set(new Vector2(-10/GameInfo.PIXEL_METER,17/GameInfo.PIXEL_METER),new Vector2(10/GameInfo.PIXEL_METER,17/GameInfo.PIXEL_METER));
         fdef.shape=head;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("head");
 
 
         EdgeShape foot=new EdgeShape();
-        foot.set(new Vector2(-11/GameInfo.PIXEL_METER,-17/GameInfo.PIXEL_METER),new Vector2(11/GameInfo.PIXEL_METER,-17/GameInfo.PIXEL_METER));
+        foot.set(new Vector2(-9/GameInfo.PIXEL_METER,-17/GameInfo.PIXEL_METER),new Vector2(9/GameInfo.PIXEL_METER,-17/GameInfo.PIXEL_METER));
         fdef.shape=foot;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("foot");
 
         EdgeShape fbody=new EdgeShape();
-        fbody.set(new Vector2(12/GameInfo.PIXEL_METER,-15/GameInfo.PIXEL_METER),new Vector2(12/GameInfo.PIXEL_METER,15/GameInfo.PIXEL_METER));
+        fbody.set(new Vector2(11/GameInfo.PIXEL_METER,-15/GameInfo.PIXEL_METER),new Vector2(11/GameInfo.PIXEL_METER,15/GameInfo.PIXEL_METER));
         fdef.shape=fbody;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("fbody");

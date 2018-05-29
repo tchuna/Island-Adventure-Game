@@ -11,21 +11,24 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.math.Rectangle;
+import com.islandboys.game.view.PlayScreen;
 
 
 public abstract class InteractiveTileObject {
     protected World world;
     protected TiledMap map;
     protected TiledMapTile tile;
+    protected Hud hud;
     protected Rectangle  bounds;
     protected Body body;
     protected Fixture fixture;
 
 
-    public InteractiveTileObject(World world, TiledMap map, com.badlogic.gdx.math.Rectangle rect){
-        this.world=world;
-        this.map=map;
+    public InteractiveTileObject(PlayScreen screen, com.badlogic.gdx.math.Rectangle rect, Hud hud){
+        this.world=screen.getWorld();
+        this.map=screen.getMap();
         this.bounds=rect;
+        this.hud=hud;
 
         BodyDef bdef=new BodyDef();
         FixtureDef fdef=new FixtureDef();
@@ -44,7 +47,9 @@ public abstract class InteractiveTileObject {
     }
 
 
-    public abstract void onHeadHit();
+    public abstract void onContactBodys();
+
+
 
     public void setCategoryFilter(short filterBIt){
         Filter filter =new Filter();

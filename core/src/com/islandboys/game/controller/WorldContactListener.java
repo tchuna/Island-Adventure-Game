@@ -25,7 +25,7 @@ public class WorldContactListener implements ContactListener {
 
 
             if(object.getUserData()!=null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())){
-                ((InteractiveTileObject)object.getUserData()).onHeadHit();
+                ((InteractiveTileObject)object.getUserData()). onContactBodys();
             }
         }
 
@@ -45,8 +45,9 @@ public class WorldContactListener implements ContactListener {
 
 
             if(object.getUserData()!=null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())){
-                ((InteractiveTileObject)object.getUserData()).onHeadHit();
+                ((InteractiveTileObject)object.getUserData()).onContactBodys();
             }
+
         }
 
 
@@ -68,7 +69,7 @@ public class WorldContactListener implements ContactListener {
 
 
             if(object.getUserData()!=null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())){
-                ((InteractiveTileObject)object.getUserData()).onHeadHit();
+                ((InteractiveTileObject)object.getUserData()). onContactBodys();
             }
         }
 
@@ -86,7 +87,7 @@ public class WorldContactListener implements ContactListener {
 
 
             if(object.getUserData()!=null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())){
-                ((InteractiveTileObject)object.getUserData()).onHeadHit();
+                ((InteractiveTileObject)object.getUserData()). onContactBodys();
             }
         }
 
@@ -100,33 +101,11 @@ public class WorldContactListener implements ContactListener {
          fbodyContact(contact);
          bbodyContact(contact);
 
-       /* Fixture fixtureA = contact.getFixtureA();
-        Fixture fixtureB = contact.getFixtureB();
-
-        int typeOfCollision = fixtureA.getFilterData().categoryBits | fixtureB.getFilterData().categoryBits;
-
-
-        switch (typeOfCollision) {
-
-
-        case GameInfo.ISLANDER_BIT | GameInfo.COINS_BIT:
-        if (fixtureA.getFilterData().categoryBits == GameInfo.ISLANDER_BIT  && fixtureB.getFilterData().categoryBits ==GameInfo.COINS_BIT) {
-           // ((Islander) fixtureA.getUserData()).incNumberOfCarrots();
-            ((Coins)fixtureB.getUserData()).onHeadHit();
-        } else {
-            //((Islander) fixtureB.getUserData()).incNumberOfCarrots();
-            ((Coins)fixtureA.getUserData()).onHeadHit();
-        }
-        break;
-        }*/
-
 
     }
 
     @Override
     public void endContact(Contact contact) {
-
-
     }
 
     @Override

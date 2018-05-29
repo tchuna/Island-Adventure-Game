@@ -3,10 +3,11 @@ package com.islandboys.game.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
+import com.islandboys.game.view.PlayScreen;
 
 public class Bricks extends InteractiveTileObject {
-    public Bricks(World world, TiledMap map, com.badlogic.gdx.math.Rectangle rect){
-        super(world,map,rect);
+    public Bricks(PlayScreen screen, com.badlogic.gdx.math.Rectangle rect, Hud hud){
+        super(screen,rect,hud);
         fixture.setUserData(this);
         setCategoryFilter(GameInfo.BRICKS_BIT);
 
@@ -15,8 +16,10 @@ public class Bricks extends InteractiveTileObject {
 
 
     @Override
-    public void onHeadHit() {
-        Gdx.app.log("Bricks","Co");
+    public void onContactBodys() {
+
 
     }
+
+
 }

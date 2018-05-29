@@ -1,5 +1,6 @@
 package com.islandboys.game.model;
 
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -28,16 +29,18 @@ public class Hud extends Stage {
 
     private float timeCount=0;
     private static int score=0;
-    private int live=0;
-    private int weapon=5;
+    private static int live=0;
+    private static int weapon=5;
     private int worldTime=0;
 
 
     private static Label scoreLabel;
-    Label timeLabel;
-    Label weaponLabel;
+    private Label timeLabel;
+    private static Label weaponLabel;
 
-    public Hud(SpriteBatch batch,int islander){
+    private static Islander islander;
+
+    public Hud(SpriteBatch batch,Islander islander){
         camera=new OrthographicCamera() ;
         this.batch=batch;
         gamePort=new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),camera);
@@ -45,9 +48,11 @@ public class Hud extends Stage {
         scoreCoin_T=new Texture("scoreCoin.png");
         weapon_T=new Texture("arrow.png");
         time_T=new Texture("time.png");
+        islander_T=new Texture("isl_1.png");
+        this.islander=islander;
 
         setupHudLabels();
-        selectIs(islander);
+
         loadLiveLevel();
         camera.position.set(gamePort.getScreenWidth()/2,gamePort.getScreenHeight()/2,0);
 
@@ -71,12 +76,12 @@ public class Hud extends Stage {
 
     public void setupHudLabels(){
 
-        scoreLabel=new Label(String.format("%03d",score),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        scoreLabel=new Label(String.format("%03d",islander.getCoins()),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         scoreLabel.setBounds(Gdx.graphics.getWidth()*375/1000,Gdx.graphics.getHeight()*838/1000,Gdx.graphics.getWidth()*125/1000,Gdx.graphics.getHeight()*209/1000);
         scoreLabel.setFontScale(2f);
 
 
-        weaponLabel=new Label(String.format("%02d",weapon),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
+        weaponLabel=new Label(String.format("%02d",islander.getNumWeapon()),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
         weaponLabel.setFontScale(2f);
         weaponLabel.setBounds(Gdx.graphics.getWidth()*625/1000,Gdx.graphics.getHeight()*838/1000,Gdx.graphics.getWidth()*125/1000,Gdx.graphics.getHeight()*209/1000);
 
@@ -104,43 +109,38 @@ public class Hud extends Stage {
 
     }
 
-    public void setLiveLevel(int live){
-        this.live=live;
+    public static void setLiveLevel(int v){
+
+        live+=v;
+        if(live==5){
+            live=0;
+        }
+        islander.setLive(live);
+        System.out.println(islander.getLive());
+
 
     }
     public static void  setScore(int v){
 
         score+=v;
-        scoreLabel.setText(String.format("%03d",score));
+        islander.setCoins(score);
+        scoreLabel.setText(String.format("%03d",islander.getCoins()));
     }
 
-    public void numWeapon(int weapon){
-        this.weapon=weapon;
-
+    public static void setWeaponn(){
+        islander.setNumWeapon(1);
+        weapon=islander.getNumWeapon();
+        //weapon=weapon-1;
+        weaponLabel.setText(String.format("%02d",weapon));
 
     }
-
-    public void selectIs(int islander){
-        switch (islander){
-            case GameInfo.ISLANDER_1:this.islander_T=new Texture("isl_1.png");break;
-            case GameInfo.ISLANDER_2:this.islander_T=new Texture("isl_2.png");break;
-            case GameInfo.ISLANDER_3:this.islander_T=new Texture("isl_3.png");break;
-
-        }
-    }
-
-
-
-
-
-
 
     @Override
 
     public void draw(){
         super.draw();
         batch.begin();
-        batch.draw(liveLevel.get(live),Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*95/100), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*13.6f/100),Gdx.graphics.getWidth()*25/100,Gdx.graphics.getHeight()*13.6f/100);
+        batch.draw(liveLevel.get(islander.getLive()),Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*95/100), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*13.6f/100),Gdx.graphics.getWidth()*25/100,Gdx.graphics.getHeight()*13.6f/100);
         batch.draw(islander_T,Gdx.graphics.getWidth()*7/1000, Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*105/1000),Gdx.graphics.getWidth()*56/1000,Gdx.graphics.getHeight()*94/1000);
         batch.draw(scoreCoin_T,Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*688/1000), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*11/100),Gdx.graphics.getWidth()*52/1000,Gdx.graphics.getHeight()*94/1000);
         batch.draw(weapon_T,Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*475/1000), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*1615/10000),Gdx.graphics.getWidth()*900/10000,Gdx.graphics.getHeight()*200/1000);
@@ -150,7 +150,10 @@ public class Hud extends Stage {
     }
 
 
-
+    public void calcScore(){
+        int score=(int)timeCount*islander.getCoins();
+        islander.setScoree(score);
+    }
 
 
 }

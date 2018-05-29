@@ -40,13 +40,16 @@ public class GameInfo implements Disposable {
     public static final int SPIKE=4;
     public static final int FIRE=5;
     public static final int COINS=6;
+    public static final int OGRES=7;
+    public static final int FLAME=8;
 
-    public static final short DEFAULT_BIT=1;
+    public static final short GROUND_BIT=1;
     public static final short ISLANDER_BIT=2;
     public static final short BRICKS_BIT=4;
     public static final short COINS_BIT=8;
     public static final short FIRE_BIT=16;
     public static final short SPIKE_BIT=32;
+    public static final short ENEMY_BIT=6;
 
     public static final short DESTROED_BIT=64;
 

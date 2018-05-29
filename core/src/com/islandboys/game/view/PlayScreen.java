@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -31,9 +32,16 @@ import com.islandboys.game.MGame;
 import com.islandboys.game.controller.Box2DWorldCreator;
 import com.islandboys.game.controller.WorldContactListener;
 import com.islandboys.game.model.Controller;
+import com.islandboys.game.model.Enemy;
+import com.islandboys.game.model.Flame;
 import com.islandboys.game.model.GameInfo;
+import com.islandboys.game.model.HellDog;
 import com.islandboys.game.model.Hud;
 import com.islandboys.game.model.Islander;
+import com.islandboys.game.model.Ogre;
+import com.islandboys.game.model.Orc;
+import com.islandboys.game.model.Skeleton;
+import com.islandboys.game.model.Undead;
 
 public class PlayScreen implements Screen{
     private MGame game;
@@ -53,8 +61,13 @@ public class PlayScreen implements Screen{
     private WorldContactListener contacListener;
 
     private Music music;
+    private Music coinSong;
 
     private Controller control;
+
+    //temporarios
+
+     private Orc dog;
 
 
     public PlayScreen(MGame game){
@@ -62,7 +75,6 @@ public class PlayScreen implements Screen{
         gamecam = new OrthographicCamera();
         gamePort=new FitViewport(GameInfo.V_WIDTH/GameInfo.PIXEL_METER,GameInfo.V_HEIGHT/ GameInfo.PIXEL_METER,gamecam);
         stage=new Stage(gamePort);
-        hudgame=new Hud(game.batch, GameInfo.ISLANDER_1);
 
         mapLoader=new TmxMapLoader();
         map=mapLoader.load("level1.tmx");
@@ -72,8 +84,8 @@ public class PlayScreen implements Screen{
 
         world=new World(new Vector2(0,-10),true);
         box2DDebugRenderer=new Box2DDebugRenderer();
-        worldCreator=new Box2DWorldCreator(world,map,hudgame);
-        islander=new Islander(world,this);
+        worldCreator=new Box2DWorldCreator(this,hudgame);
+        islander=new Islander(this);
         contacListener=new WorldContactListener();
 
         world.setContactListener(contacListener);
@@ -81,9 +93,18 @@ public class PlayScreen implements Screen{
 
         music= game.assetManager.get("song.wav",Music.class);
         music.setLooping(true);
-        music.play();
+        //music.play();
+        music.setVolume(0.05f);
+
+        hudgame=new Hud(game.batch,islander);
+
 
         this.control=new Controller();
+
+
+        ///temporarios
+
+        dog=new Orc(this,.32f,.32f);
 
 
 
@@ -91,11 +112,23 @@ public class PlayScreen implements Screen{
     }
 
 
+    public TiledMap getMap() {
+        return map;
+    }
 
+    public World getWorld() {
+        return world;
+    }
 
-    public void toucInput(float delta){
+    public OrthographicCamera getGamecam(){
+        return gamecam;
+    }
 
+    public Islander getIslander() {
+        return islander;
+    }
 
+    public void input(float delta){
 
         if(control.isRightPressed())
             islander.body.setLinearVelocity(new Vector2(2, islander.body.getLinearVelocity().y));
@@ -109,14 +142,25 @@ public class PlayScreen implements Screen{
 
     }
 
+    public void attackInput(){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.A)){
+
+            if(islander.getNumWeapon()>0)
+            MGame.assetManager.get("attack.wav",Sound.class).play();
+            hudgame.setWeaponn();
+        }
+
+
+
+
+    }
+
 
     public void handleInput(float delta){
 
 
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) &&  islander.body.getLinearVelocity().y == 0){
                 islander.body.applyLinearImpulse(new Vector2(0,4f),islander.body.getWorldCenter(),true);
-
 
         }
 
@@ -124,29 +168,34 @@ public class PlayScreen implements Screen{
             islander.body.applyLinearImpulse(new Vector2(0.4f,0),islander.body.getWorldCenter(),true);
         }
 
-
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && islander.body.getLinearVelocity().x>=-2){
             islander.body.applyLinearImpulse(new Vector2(-0.4f,0),islander.body.getWorldCenter(),true);
         }
 
-
-
-
-
     }
+
+
     public void update(float delta){
 
-
-        //handleInput(delta);
-        toucInput(delta);
-        //
+        input(delta);
+        attackInput();
         islander.update(delta);
+        dog.update(delta);
+
+        for(Enemy ogre:worldCreator.getOgres()){
+            ogre.update(delta);
+        }
+
+        for(Enemy flame:worldCreator.getFlames()){
+            flame.update(delta);
+        }
 
         world.step(1/60f,6,2);
         islander.update(delta);
         hudgame.update(delta);
 
         gamecam.position.x=islander.body.getPosition().x;
+
 
         gamecam.update();
         renderer.setView(gamecam);
@@ -172,6 +221,16 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         islander.draw(game.batch);
+
+        dog.draw(game.batch);
+        for(Enemy enemy:worldCreator.getOgres()){
+            enemy.draw(game.batch);
+        }
+
+        for(Enemy enemy:worldCreator.getFlames()){
+            enemy.draw(game.batch);
+        }
+
         game.batch.end();
 
         game.batch.setProjectionMatrix(hudgame.hudStage.getCamera().combined);
@@ -182,7 +241,6 @@ public class PlayScreen implements Screen{
             control.draw();
         }
 
-        control.draw();
 
 
 
@@ -196,7 +254,6 @@ public class PlayScreen implements Screen{
         stage.getViewport().update(width, height,    true);
         hudgame.hudStage.getViewport().update(width, height);
         control.resize(width,height);
-        // gamePort.update(width,height);
 
     }
 

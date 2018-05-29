@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -44,7 +45,13 @@ public class MGame extends Game {
 
 		assetManager=new AssetManager();
 		assetManager.load("song.wav", Music.class);
-		assetManager.finishLoading();
+		assetManager.load("coin.wav", Sound.class);
+		assetManager.load("hurt.wav",Sound.class);
+		assetManager.load("attack.wav",Sound.class);
+        assetManager.load("attack_O.ogg",Sound.class);
+		assetManager.load("attack_D.mp3",Sound.class);
+
+  		assetManager.finishLoading();
 		this.sontOn=true;
 
 		this.playScreen=new PlayScreen(this);
@@ -85,7 +92,11 @@ public class MGame extends Game {
 
 	@Override
 	public void dispose(){
+
 		super.dispose();
+		batch.dispose();
+		assetManager.dispose();
+
 	}
 
 }

@@ -37,15 +37,22 @@ public class Islander extends Sprite {
     private Animation islanderJump;
     private Animation islanderFailng;
 
+
     private float stateTimer;
     private boolean directionRigh;
     public  boolean isInAir;
 
+    private  boolean isAlive=true;
+    private int numWeapon=10;
+    private int live=0;
+    private int coins=0;
+    private int score=0;
 
 
 
-    public Islander(World world, PlayScreen screen){
-        this.world =world;
+
+    public Islander( PlayScreen screen){
+        this.world =screen.getWorld();
 
         idle=new Texture("idle.png");
         running=new Texture("runing.png");
@@ -60,6 +67,49 @@ public class Islander extends Sprite {
         createSprites();
         defineIslander();
 
+
+    }
+
+
+    public int getLive(){
+        return this.live;
+    }
+
+    public int getNumWeapon(){
+        return this.numWeapon;
+    }
+
+    public boolean isAlive(){
+        return this.isAlive;
+    }
+
+    public int getCoins(){
+        return this.coins;
+    }
+
+
+
+    public void setCoins(int coins){
+        this.coins=coins;
+    }
+    public void setLive(int live){
+        this.live=live;
+    }
+
+    public void setNumWeapon(int weapon){
+        this.numWeapon-=weapon;
+        if(numWeapon<=0){
+            numWeapon=0;
+        }
+    }
+
+    public void setIsAlive(){
+        this.isAlive=false;
+    }
+
+
+    public void setScoree(int score){
+        this.score= score;
 
     }
 
@@ -149,7 +199,7 @@ public class Islander extends Sprite {
     }
 
     public void update(float delta){
-        setPosition(body.getPosition().x-getWidth()/2,(body.getPosition().y-getHeight()/2));
+        setPosition(body.getPosition().x-getWidth()/2.2f,(body.getPosition().y-getHeight()/3f));
         setRegion(getFrames(delta));
 
     }
@@ -175,40 +225,41 @@ public class Islander extends Sprite {
 
         FixtureDef fdef=new FixtureDef();
 
-       // CircleShape shape= new CircleShape();
-        //shape.setRadius(10/GameInfo.PIXEL_METER);
-        PolygonShape shape=new PolygonShape();
-        shape.setAsBox(6/GameInfo.PIXEL_METER,16.5f/GameInfo.PIXEL_METER);
+
+
+        CircleShape shape= new CircleShape();
+        shape.setRadius(10/GameInfo.PIXEL_METER);
 
         fdef.filter.categoryBits=GameInfo.ISLANDER_BIT;
 
-        fdef.filter.maskBits=GameInfo.BRICKS_BIT|GameInfo.COINS_BIT|GameInfo.FIRE_BIT|GameInfo.SPIKE_BIT|GameInfo.DEFAULT_BIT;
+        fdef.filter.maskBits=GameInfo.BRICKS_BIT|GameInfo.COINS_BIT|GameInfo.FIRE_BIT|
+                GameInfo.SPIKE_BIT|GameInfo.GROUND_BIT|GameInfo.ENEMY_BIT;
 
         fdef.shape=shape;
         body.createFixture(fdef);
 
         EdgeShape head=new EdgeShape();
-        head.set(new Vector2(-10/GameInfo.PIXEL_METER,17/GameInfo.PIXEL_METER),new Vector2(10/GameInfo.PIXEL_METER,17/GameInfo.PIXEL_METER));
+        head.set(new Vector2(-13/GameInfo.PIXEL_METER,22/GameInfo.PIXEL_METER),new Vector2(13/GameInfo.PIXEL_METER,22/GameInfo.PIXEL_METER));
         fdef.shape=head;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("head");
 
 
         EdgeShape foot=new EdgeShape();
-        foot.set(new Vector2(-9/GameInfo.PIXEL_METER,-17/GameInfo.PIXEL_METER),new Vector2(9/GameInfo.PIXEL_METER,-17/GameInfo.PIXEL_METER));
+        foot.set(new Vector2(-9/GameInfo.PIXEL_METER,-11/GameInfo.PIXEL_METER),new Vector2(9/GameInfo.PIXEL_METER,-11/GameInfo.PIXEL_METER));
         fdef.shape=foot;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("foot");
 
         EdgeShape fbody=new EdgeShape();
-        fbody.set(new Vector2(11/GameInfo.PIXEL_METER,-15/GameInfo.PIXEL_METER),new Vector2(11/GameInfo.PIXEL_METER,15/GameInfo.PIXEL_METER));
+        fbody.set(new Vector2(11/GameInfo.PIXEL_METER,-11/GameInfo.PIXEL_METER),new Vector2(11/GameInfo.PIXEL_METER,11/GameInfo.PIXEL_METER));
         fdef.shape=fbody;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("fbody");
 
 
         EdgeShape bbody=new EdgeShape();
-        bbody.set(new Vector2(-12/GameInfo.PIXEL_METER,-15/GameInfo.PIXEL_METER),new Vector2(-12/GameInfo.PIXEL_METER,15/GameInfo.PIXEL_METER));
+        bbody.set(new Vector2(-12/GameInfo.PIXEL_METER,-11/GameInfo.PIXEL_METER),new Vector2(-12/GameInfo.PIXEL_METER,11/GameInfo.PIXEL_METER));
         fdef.shape=bbody;
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("bbody");

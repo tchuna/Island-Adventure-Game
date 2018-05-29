@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		config.title = "Adventures In Sal Island";
 		config.width = GameInfo.WIDTH;
 		config.height = GameInfo.HEIGHT;
-		//config.resizable = false;
+		config.resizable = false;
 
 
 		new LwjglApplication(new MGame(), config);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="309">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="325">
  <tileset firstgid="1" name="s" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="2052" columns="38">
   <image source="s.png" width="700" height="978"/>
  </tileset>
@@ -170,5 +170,19 @@
   <object id="298" x="1360" y="176" width="16" height="16"/>
   <object id="299" x="1376" y="176" width="16" height="16"/>
   <object id="300" x="1392" y="176" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Skeleton">
+  <object id="318" x="720" y="64" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Orcs">
+  <object id="319" x="304" y="160" width="16" height="16"/>
+  <object id="320" x="3008" y="160" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Undeads">
+  <object id="321" x="528" y="160" width="16" height="16"/>
+  <object id="322" x="1008" y="160" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Helldog">
+  <object id="324" x="1536" y="160" width="16" height="16"/>
  </objectgroup>
 </map>

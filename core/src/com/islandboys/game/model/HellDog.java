@@ -3,7 +3,9 @@ package com.islandboys.game.model;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -45,6 +47,10 @@ public class HellDog extends Enemy {
         shape.setAsBox(20/GameInfo.PIXEL_METER,12/GameInfo.PIXEL_METER);
         fdef.filter.categoryBits=GameInfo.ENEMY_BIT;
 
+        width=(int)(20/GameInfo.PIXEL_METER);//largura
+        heigth=(int)(12/GameInfo.PIXEL_METER);//altura
+
+
         fdef.filter.maskBits=GameInfo.GROUND_BIT|GameInfo.ISLANDER_BIT|GameInfo.ENEMY_BIT;
 
         fdef.shape=shape;
@@ -83,26 +89,36 @@ public class HellDog extends Enemy {
 
     public TextureRegion getFrames(float delta){
 
-        TextureRegion region;
+        TextureRegion region=new TextureRegion();
         if(state==State.IDLE){
-            return (TextureRegion)idleAnimation.getKeyFrame(stateTime,true);
-    }
-        return  (TextureRegion)runAnimation.getKeyFrame(stateTime,true);
-
-    }
-
-
-    @Override
-    public void update(float delta) {
-
-        stateTime+=delta;
-        count++;
-
-        System.out.println(count);
-        if(count==10){
-            MGame.assetManager.get("attack_D.mp3",Sound.class).play();
+            region=(TextureRegion)idleAnimation.getKeyFrame(stateTime,true);
         }
-        setRegion(getFrames(delta));
+
+        if(state==State.RUNNING){
+         region =(TextureRegion)runAnimation.getKeyFrame(stateTime,true);
+        }
+
+        if(state==State.DEAD){
+            region =(TextureRegion)idleAnimation.getKeyFrame(stateTime,true);
+        }
+
+        if((enemyBody.getLinearVelocity().x<0 || !directionRigh) && !region.isFlipX()){
+            region.flip(true,false);
+            directionRigh=false;
+
+
+        }else if((enemyBody.getLinearVelocity().x>0||directionRigh) && region.isFlipX()){
+            region.flip(true,false);
+            directionRigh=true;
+        }
+
+
+        return region;
+    }
+
+
+    public  void spritePosition(){
+
         if(State.IDLE==state){
             setPosition(enemyBody.getPosition().x-getWidth()/2.2f,(enemyBody.getPosition().y-getHeight()/2.5f));
         }
@@ -111,5 +127,87 @@ public class HellDog extends Enemy {
             setPosition(enemyBody.getPosition().x-getWidth()/1.8f,(enemyBody.getPosition().y-getHeight()/2.5f));
         }
 
+
     }
+
+    public void setSt(State state){
+        this.state=state;
+    }
+
+
+    @Override
+    public void update(float delta) {
+
+        stateTime+=delta;
+        count++;
+        float result=screen.getIslander().getX()-enemyBody.getPosition().x;
+
+
+
+        if(state!=State.DEAD){
+            if(result<0.4 && result>-0.7 && screen.getIslander().getY()<=enemyBody.getPosition().y){
+                state=State.IDLE;
+            }else{
+                state=State.IDLE.RUNNING;
+            }
+
+            if(count<70){
+
+                if(state==State.RUNNING){
+                    Vector2 vect=new Vector2(0.5f,0);
+                    enemyBody.setLinearVelocity(vect);
+                }
+
+            }else if(count>70){
+                if(state==State.RUNNING){
+                    Vector2 vect=new Vector2(-0.5f,0);
+                    enemyBody.setLinearVelocity(vect);
+                }
+
+            }
+
+            if(count>140){
+                count=0;
+            }
+        }
+
+
+
+
+        //System.out.println(screen.getIslander().getX());
+        //System.out.println(enemyBody.getPosition().x);
+
+
+
+
+        if(destroy==false && state==State.DEAD ){
+            System.out.println("DEAD");
+            world.destroyBody(enemyBody);
+            destroy=true;
+            stateTime=0;
+        }
+
+
+
+        setRegion(getFrames(delta));
+        spritePosition();
+
+
+
+       /* if(count==10){
+            MGame.assetManager.get("attack_D.mp3",Sound.class).play();
+        }*/
+
+
+    }
+    @Override
+    public void draw(Batch batch) {
+        if(state!=State.DEAD || stateTime<1f){
+            super.draw(batch);
+
+        }
+
+    }
+
+
 }

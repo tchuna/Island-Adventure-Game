@@ -7,33 +7,19 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class GameInfo implements Disposable {
 
-   private static Texture islanderImages;
-
-    private static TextureRegion[] runningFrames;
-    private static TextureRegion[] startingFrames;
-    private static TextureRegion[] fallingFrames;
-    private static TextureRegion[] deadFrames;
-    private  static TextureRegion stand;
-
-
-
 
 
     public static final int WIDTH=800;
     public static final int HEIGHT=480;
 
-
- public static final int C_WIDTH=500;
- public static final int C_HEIGHT=300;
+    public static final int C_WIDTH=500;
+    public static final int C_HEIGHT=300;
 
 
     public static final int V_WIDTH=400;
     public static final int V_HEIGHT=208;
     public static final float PIXEL_METER=85;
 
-    public static final int ISLANDER_1=1;
-    public static final int ISLANDER_2=2;
-    public static final int ISLANDER_3=3;
 
     public static final int GROUND=2;
     public static final int BRICKS=3;
@@ -42,6 +28,11 @@ public class GameInfo implements Disposable {
     public static final int COINS=6;
     public static final int OGRES=7;
     public static final int FLAME=8;
+    public static final int SKELETON=9;
+    public static final int ORCS=10;
+    public static final int UNDEAD=11;
+    public static final int HELLD=12;
+
 
     public static final short GROUND_BIT=1;
     public static final short ISLANDER_BIT=2;
@@ -53,22 +44,7 @@ public class GameInfo implements Disposable {
 
     public static final short DESTROED_BIT=64;
 
-
-
-
-
-    private static Texture getIslanderImages(){
-        if(islanderImages==null){
-            islanderImages=new Texture("sprites.png");
-        }
-
-        return islanderImages;
-
-    }
-
-
-
-
+    public static final  float ARROW_SPEED=0.06f;
 
 
 

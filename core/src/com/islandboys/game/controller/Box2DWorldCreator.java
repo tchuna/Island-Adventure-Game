@@ -16,10 +16,16 @@ import com.islandboys.game.model.Coins;
 import com.islandboys.game.model.Fire;
 import com.islandboys.game.model.Flame;
 import com.islandboys.game.model.GameInfo;
+import com.islandboys.game.model.HellDog;
 import com.islandboys.game.model.Hud;
 import com.islandboys.game.model.Ogre;
+import com.islandboys.game.model.Orc;
+import com.islandboys.game.model.Skeleton;
 import com.islandboys.game.model.Spike;
+import com.islandboys.game.model.Undead;
 import com.islandboys.game.view.PlayScreen;
+
+import javax.swing.KeyStroke;
 
 public class Box2DWorldCreator {
 
@@ -28,6 +34,10 @@ public class Box2DWorldCreator {
 
     private Array<Ogre> ogres;
     private Array<Flame> flames;
+    private Array<Skeleton>skeletons;
+    private Array<Orc>orcs;
+    private Array<Undead>undeads;
+    private Array<HellDog>dog;
 
 
     public Box2DWorldCreator(PlayScreen screen,Hud hud ) {
@@ -108,7 +118,7 @@ public class Box2DWorldCreator {
 
         }
 
-        //ogres bdx
+        //flames bdx
         flames=new Array<Flame>();
         for (MapObject object : screen.getMap().getLayers().get(GameInfo.FLAME).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -117,6 +127,42 @@ public class Box2DWorldCreator {
 
         }
 
+        //Skeleton
+        skeletons=new Array<Skeleton>();
+        for (MapObject object : screen.getMap().getLayers().get(GameInfo.SKELETON).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            skeletons.add(new Skeleton(screen,rect.getX()/GameInfo.PIXEL_METER,rect.getY()/GameInfo.PIXEL_METER));
+
+        }
+
+        //Orcs
+       orcs=new Array<Orc>();
+        for (MapObject object : screen.getMap().getLayers().get(GameInfo.ORCS).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            orcs.add(new Orc(screen,rect.getX()/GameInfo.PIXEL_METER,rect.getY()/GameInfo.PIXEL_METER));
+
+        }
+
+        //UND
+        undeads=new Array<Undead>();
+        for (MapObject object : screen.getMap().getLayers().get(GameInfo.UNDEAD).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            undeads.add(new Undead(screen,rect.getX()/GameInfo.PIXEL_METER,rect.getY()/GameInfo.PIXEL_METER));
+
+        }
+
+
+        //dog
+        dog=new Array<HellDog>();
+        for (MapObject object : screen.getMap().getLayers().get(GameInfo.HELLD).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+           dog.add(new HellDog(screen,rect.getX()/GameInfo.PIXEL_METER,rect.getY()/GameInfo.PIXEL_METER));
+
+        }
 
 
     }
@@ -128,6 +174,23 @@ public class Box2DWorldCreator {
     public Array<Flame> getFlames() {
         return flames;
     }
+
+    public Array<Skeleton> getSkeletons() {
+        return skeletons;
+    }
+
+    public Array<Orc> getOrcs() {
+        return orcs;
+    }
+
+    public Array<Undead> getUndeads() {
+        return undeads;
+    }
+
+    public Array<HellDog> getHelldog() {
+        return dog;
+    }
+
 
 
 

@@ -17,25 +17,32 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.islandboys.game.view.PlayScreen;
 
-public class Islander extends Sprite {
+import java.util.ArrayList;
 
+public class Islander extends Sprite {
     public enum  State{IDLE,JUMPING,RUNNING,FALLING,DEAD}
 
-    public World world;
-    public Body body;
+
+
+    private Body body;
     private Texture idle;
     private Texture jump;
     private Texture running;
     private Texture fail;
     private TextureRegion standImage;
 
-    public State currentState;
-    public State previousState;
+
+
+    private ArrayList<Arrow> arrows;
+
+    private  State currentState;
+    private  State previousState;
 
     private Animation islanderRunning;
     private Animation islanderIdle;
     private Animation islanderJump;
     private Animation islanderFailng;
+    private PlayScreen screen;
 
 
     private float stateTimer;
@@ -53,6 +60,7 @@ public class Islander extends Sprite {
 
     public Islander( PlayScreen screen){
         this.world =screen.getWorld();
+        this.screen=screen;
 
         idle=new Texture("idle.png");
         running=new Texture("runing.png");
@@ -63,6 +71,7 @@ public class Islander extends Sprite {
         previousState=State.IDLE;
         directionRigh=true;
         stateTimer=0;
+        arrows=new ArrayList<Arrow>(numWeapon);
 
         createSprites();
         defineIslander();
@@ -70,6 +79,11 @@ public class Islander extends Sprite {
 
     }
 
+
+
+    public ArrayList<Arrow> getArrows() {
+        return arrows;
+    }
 
     public int getLive(){
         return this.live;
@@ -88,6 +102,21 @@ public class Islander extends Sprite {
     }
 
 
+    public void shoot() {
+        arrows.add(new Arrow(screen, this.getX(), this.getY(), this.getDirectionRigh()));
+    }
+
+
+
+    public World getWorld() {
+        return world;
+    }
+
+    private World world;
+
+    public Body getBody() {
+        return body;
+    }
 
     public void setCoins(int coins){
         this.coins=coins;
@@ -102,6 +131,9 @@ public class Islander extends Sprite {
             numWeapon=0;
         }
     }
+
+
+
 
     public void setIsAlive(){
         this.isAlive=false;
@@ -264,6 +296,11 @@ public class Islander extends Sprite {
         fdef.isSensor=true;
         body.createFixture(fdef).setUserData("bbody");
 
+    }
+
+
+    public boolean getDirectionRigh(){
+        return directionRigh;
     }
 
 

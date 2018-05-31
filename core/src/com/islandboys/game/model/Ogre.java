@@ -2,6 +2,7 @@ package com.islandboys.game.model;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -28,12 +29,14 @@ public class Ogre extends Enemy {
     private float count=300;
     private PolygonShape shape;
 
+
     public Ogre(PlayScreen screen, float x_position, float y_position) {
         super(screen, x_position, y_position);
     }
 
     @Override
     protected void defineEnemyBody(float x_position,float y_position) {
+        state=State.IDLE;
         BodyDef bdf=new BodyDef();
         bdf.position.set(x_position,y_position);
         bdf.type= BodyDef.BodyType.DynamicBody;
@@ -44,6 +47,8 @@ public class Ogre extends Enemy {
         shape=new PolygonShape();
         shape.setAsBox(9/GameInfo.PIXEL_METER,14.8f/GameInfo.PIXEL_METER);
         fdef.filter.categoryBits=GameInfo.ENEMY_BIT;
+        width=9/GameInfo.PIXEL_METER;
+        heigth=14.8f/GameInfo.PIXEL_METER;
 
         fdef.filter.maskBits=GameInfo.GROUND_BIT|GameInfo.ISLANDER_BIT;
 
@@ -115,8 +120,6 @@ public class Ogre extends Enemy {
     public void update(float delta){
         stateTime+=delta;
 
-        //System.out.println(screen.getIslander().getX());
-       // System.out.println(enemyBody.getPosition().x);
 
         count--;
         Vector2 vect=new Vector2();
@@ -128,7 +131,7 @@ public class Ogre extends Enemy {
 
         if( count<=50 && count >0){
             vect=new Vector2(2,0);
-            if(count==50 && (screen.getIslander().getX()+3>enemyBody.getPosition().x && screen.getIslander().getX()-3<enemyBody.getPosition().x ) ){
+            if(count==50 && state!=State.DEAD &&(screen.getIslander().getX()+3>enemyBody.getPosition().x && screen.getIslander().getX()-3<enemyBody.getPosition().x ) ){
                 MGame.assetManager.get("attack_O.ogg",Sound.class).play();
             }
 
@@ -148,7 +151,7 @@ public class Ogre extends Enemy {
             }
 
             vect=new Vector2(-2,0);
-            if(count==-250 &&  (screen.getIslander().getX()+3>enemyBody.getPosition().x && screen.getIslander().getX()-3<enemyBody.getPosition().x )){
+            if(count==-250 && state!=State.DEAD &&  (screen.getIslander().getX()+3>enemyBody.getPosition().x && screen.getIslander().getX()-3<enemyBody.getPosition().x )){
                 MGame.assetManager.get("attack_O.ogg",Sound.class).play();
             }
 
@@ -166,6 +169,22 @@ public class Ogre extends Enemy {
 
         }
 
+
+        if(destroy==false && state==State.DEAD ){
+            world.destroyBody(enemyBody);
+            destroy=true;
+            stateTime=0;
+        }
+
+
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        if(state!=State.DEAD||stateTime<0.2f ){
+            super.draw(batch);
+
+        }
 
     }
 }

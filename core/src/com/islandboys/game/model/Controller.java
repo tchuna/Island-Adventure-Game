@@ -18,7 +18,7 @@ public class Controller {
 
     Viewport viewport;
     Stage stage;
-    boolean upPressed, downPressed, leftPressed, rightPressed;
+    boolean upPressed, downPressed, leftPressed, rightPressed,spacePressed;
     OrthographicCamera cam;
 
     public Controller(){
@@ -68,9 +68,6 @@ public class Controller {
         });
 
         Gdx.input.setInputProcessor(stage);
-
-        Table table = new Table();
-        table.left().bottom();
 
         Image upImg = new Image(new Texture("up.png"));
         upImg.setSize(50, 50);
@@ -167,6 +164,9 @@ public class Controller {
     public boolean isRightPressed() {
         return rightPressed;
     }
+
+    public boolean isSpacePressed() { return spacePressed;}
+
 
     public void resize(int width, int height){
         viewport.update(width, height);

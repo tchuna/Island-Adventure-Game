@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
 import com.islandboys.game.controller.Box2DWorldCreator;
 import com.islandboys.game.controller.WorldContactListener;
+import com.islandboys.game.model.Arrow;
 import com.islandboys.game.model.Controller;
 import com.islandboys.game.model.Enemy;
 import com.islandboys.game.model.Flame;
@@ -42,6 +43,8 @@ import com.islandboys.game.model.Ogre;
 import com.islandboys.game.model.Orc;
 import com.islandboys.game.model.Skeleton;
 import com.islandboys.game.model.Undead;
+
+import java.util.ArrayList;
 
 public class PlayScreen implements Screen{
     private MGame game;
@@ -67,7 +70,7 @@ public class PlayScreen implements Screen{
 
     //temporarios
 
-     private Orc dog;
+     private HellDog dog;
 
 
     public PlayScreen(MGame game){
@@ -104,9 +107,7 @@ public class PlayScreen implements Screen{
 
         ///temporarios
 
-        dog=new Orc(this,.32f,.32f);
-
-
+        dog=new HellDog(this,.32f,.32f);
 
 
     }
@@ -131,70 +132,129 @@ public class PlayScreen implements Screen{
     public void input(float delta){
 
         if(control.isRightPressed())
-            islander.body.setLinearVelocity(new Vector2(2, islander.body.getLinearVelocity().y));
+            islander.getBody().setLinearVelocity(new Vector2(2, islander.getBody().getLinearVelocity().y));
         else if (control.isLeftPressed())
-            islander.body.setLinearVelocity(new Vector2(-2, islander.body.getLinearVelocity().y));
+            islander.getBody().setLinearVelocity(new Vector2(-2, islander.getBody().getLinearVelocity().y));
         else
-            islander.body.setLinearVelocity(new Vector2(0, islander.body.getLinearVelocity().y));
-        if (control.isUpPressed() && islander.body.getLinearVelocity().y == 0)
-            islander.body.applyLinearImpulse(new Vector2(0, 4f), islander.body.getWorldCenter(), true);
+            islander.getBody().setLinearVelocity(new Vector2(0, islander.getBody().getLinearVelocity().y));
+        if (control.isUpPressed() && islander.getBody().getLinearVelocity().y == 0)
+            islander.getBody().applyLinearImpulse(new Vector2(0, 4f), islander.getBody().getWorldCenter(), true);
 
-
-    }
-
-    public void attackInput(){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.A)){
-
-            if(islander.getNumWeapon()>0)
-            MGame.assetManager.get("attack.wav",Sound.class).play();
-            hudgame.setWeaponn();
+        else  if(control.isSpacePressed()){
+            islander.shoot();
         }
-
 
 
 
     }
 
+    public void attackInput(float delta) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 
-    public void handleInput(float delta){
 
+            if (islander.getNumWeapon() > 0) {
+                MGame.assetManager.get("attack.wav", Sound.class).play();
+                hudgame.setWeaponn();
+                islander.shoot();
+            }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) &&  islander.body.getLinearVelocity().y == 0){
-                islander.body.applyLinearImpulse(new Vector2(0,4f),islander.body.getWorldCenter(),true);
 
         }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && islander.body.getLinearVelocity().x<=2){
-            islander.body.applyLinearImpulse(new Vector2(0.4f,0),islander.body.getWorldCenter(),true);
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && islander.body.getLinearVelocity().x>=-2){
-            islander.body.applyLinearImpulse(new Vector2(-0.4f,0),islander.body.getWorldCenter(),true);
-        }
-
     }
 
 
     public void update(float delta){
 
         input(delta);
-        attackInput();
+        attackInput(delta);
         islander.update(delta);
         dog.update(delta);
+
+
 
         for(Enemy ogre:worldCreator.getOgres()){
             ogre.update(delta);
         }
 
+        for(Enemy sk:worldCreator.getSkeletons()){
+            sk.update(delta);
+        }
+
+        for(Enemy orc:worldCreator.getOrcs()){
+            orc.update(delta);
+        }
+
+        for(Enemy und:worldCreator.getUndeads()){
+            und.update(delta);
+        }
+
+        for(Enemy dog:worldCreator.getHelldog()){
+            dog.update(delta);
+        }
+
+
+        ArrayList<Arrow>removeArrows=new ArrayList<Arrow>();
+
+        for(Arrow arrow:islander.getArrows()){
+            arrow.update(delta);
+            if(arrow.getDestroy()){
+                removeArrows.add(arrow);
+            }
+
+            if(arrow.contacEnemy(dog)) {
+                dog.setSt(Enemy.State.DEAD);
+            }
+
+            for(Enemy ogre:worldCreator.getOgres()){
+                 if(arrow.contacEnemy(ogre)) {
+                     ogre.setState(Enemy.State.DEAD);
+                 }
+            }
+
+            for(Enemy sk:worldCreator.getSkeletons()){
+                if(arrow.contacEnemy(sk)) {
+                    sk.setState(Enemy.State.DEAD);
+                }
+            }
+
+            for(Orc orcs:worldCreator.getOrcs()){
+                if(arrow.contacEnemy(orcs)) {
+                    orcs.setSt(Enemy.State.DEAD);
+                }
+            }
+
+            for(Undead unde:worldCreator.getUndeads()){
+                if(arrow.contacEnemy(unde)) {
+                    unde.setSt(Enemy.State.DEAD);
+                }
+            }
+
+            for(HellDog dog:worldCreator.getHelldog()){
+                if(arrow.contacEnemy(dog)) {
+                    dog.setSt(Enemy.State.DEAD);
+                }
+            }
+
+
+
+        }
+
+
+
+        islander.getArrows().removeAll(removeArrows);
+
+
+
+
         for(Enemy flame:worldCreator.getFlames()){
             flame.update(delta);
         }
 
-        world.step(1/60f,6,2);
+        world.step(1.2f/60f,6,2);
         islander.update(delta);
         hudgame.update(delta);
 
-        gamecam.position.x=islander.body.getPosition().x;
+        gamecam.position.x=islander.getBody().getPosition().x;
 
 
         gamecam.update();
@@ -202,9 +262,41 @@ public class PlayScreen implements Screen{
 
     }
 
+    public void drawEnemys(){
+        for(Arrow arrow:islander.getArrows()){
+            arrow.render(game.batch);
+        }
+
+
+        for(Enemy enemy:worldCreator.getOgres()){
+            enemy.draw(game.batch);
+        }
+
+        for(Enemy enemy:worldCreator.getFlames()){
+            enemy.draw(game.batch);
+        }
+
+        for(Enemy sk:worldCreator.getSkeletons()){
+            sk.draw(game.batch);
+        }
+
+        for(Enemy orcs:worldCreator.getOrcs()){
+            orcs.draw(game.batch);
+        }
+
+        for(Enemy unde:worldCreator.getUndeads()){
+           unde.draw(game.batch);
+        }
+
+        for(Enemy dog:worldCreator.getHelldog()){
+           dog.draw(game.batch);
+        }
+
+    }
+
+
     @Override
     public void show() {
-
 
     }
 
@@ -221,15 +313,8 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         islander.draw(game.batch);
-
         dog.draw(game.batch);
-        for(Enemy enemy:worldCreator.getOgres()){
-            enemy.draw(game.batch);
-        }
-
-        for(Enemy enemy:worldCreator.getFlames()){
-            enemy.draw(game.batch);
-        }
+        drawEnemys();
 
         game.batch.end();
 

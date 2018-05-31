@@ -15,20 +15,52 @@ public  abstract class Enemy extends Sprite {
 
     protected World world;
     protected PlayScreen screen;
-    public Body enemyBody;
+
+
+    protected State state;
+    protected boolean destroy=false;
+    protected float stateTime;
+    protected  boolean directionRigh=true;
+
+
+
+    protected Body enemyBody;
+    protected  float heigth,width;
+
     public Enemy(PlayScreen screen,float x_position,float y_position){
         this.screen=screen;
         this.world=screen.getWorld();
 
 
         defineEnemyBody(x_position,y_position);
-        //setPosition(x_position,y_position);
-
-        //velocity=new Vector2(0.5f,0);
 
     }
 
+    public Body getEnemyBody() {
+        return enemyBody;
+    }
+
+    public  float getH(){
+        return heigth;
+    }
+    public float getW(){
+        return width;
+    }
+
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+
+
     protected  abstract void  defineEnemyBody(float x_position,float y_position);
     public abstract void update(float delta);
+
+
 
 }

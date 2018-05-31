@@ -8,6 +8,7 @@ import com.islandboys.game.MGame;
 import com.islandboys.game.view.PlayScreen;
 
 public class Spike extends InteractiveTileObject {
+    private int counthurt=0;
     public Spike(PlayScreen screen, com.badlogic.gdx.math.Rectangle rect, Hud hud){
         super(screen,rect,hud);
         fixture.setUserData(this);
@@ -18,7 +19,15 @@ public class Spike extends InteractiveTileObject {
 
     @Override
     public void onContactBodys() {
-        hud.setLiveLevel(1);
+        counthurt++;
+        if(counthurt==2){
+            hud.setLiveLevel(1);
+        }
+
+        if(counthurt>20){
+            counthurt=0;
+        }
+
         MGame.assetManager.get("hurt.wav",Sound.class).play();
 
     }

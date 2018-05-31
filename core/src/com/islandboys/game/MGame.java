@@ -50,6 +50,7 @@ public class MGame extends Game {
 		assetManager.load("attack.wav",Sound.class);
         assetManager.load("attack_O.ogg",Sound.class);
 		assetManager.load("attack_D.mp3",Sound.class);
+		assetManager.load("orc_.mp3",Sound.class);
 
   		assetManager.finishLoading();
 		this.sontOn=true;

@@ -243,6 +243,11 @@ public class Skeleton extends Enemy{
     }
 
 
+    @Override
+    public State getState() {
+        return state;
+    }
+
    @Override
     public void draw(Batch batch) {
         if(state!=State.DEAD || stateTime<1.5f){

@@ -173,13 +173,6 @@ public class HellDog extends Enemy {
 
 
 
-
-        //System.out.println(screen.getIslander().getX());
-        //System.out.println(enemyBody.getPosition().x);
-
-
-
-
         if(destroy==false && state==State.DEAD ){
             System.out.println("DEAD");
             world.destroyBody(enemyBody);
@@ -199,6 +192,11 @@ public class HellDog extends Enemy {
         }*/
 
 
+    }
+
+    @Override
+    public State getState() {
+        return state;
     }
     @Override
     public void draw(Batch batch) {

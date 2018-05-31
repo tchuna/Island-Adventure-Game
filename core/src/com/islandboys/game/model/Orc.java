@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.Array;
 import com.islandboys.game.MGame;
 import com.islandboys.game.view.PlayScreen;
 
+import java.util.ArrayList;
+
 public class Orc extends Enemy {
 
     private float stateTime;
@@ -21,12 +23,20 @@ public class Orc extends Enemy {
     private Texture idle, run, attack, dead;
     private PolygonShape shape;
     Enemy.State state;
+
     int count = 0;
 
     public Orc(PlayScreen screen, float x_position, float y_position) {
         super(screen, x_position, y_position);
+
     }
 
+
+
+    @Override
+    public State getState() {
+        return state;
+    }
 
     @Override
     protected void defineEnemyBody(float x_position, float y_position) {
@@ -47,9 +57,10 @@ public class Orc extends Enemy {
 
 
         fdef.filter.maskBits = GameInfo.GROUND_BIT | GameInfo.ISLANDER_BIT | GameInfo.ENEMY_BIT;
-
+        fdef.restitution=1f;
         fdef.shape = shape;
         enemyBody.createFixture(fdef);
+
 
         creatSprite(shape);
     }
@@ -167,9 +178,9 @@ public class Orc extends Enemy {
         float result=screen.getIslander().getX()-enemyBody.getPosition().x;
 
 
-
         if(state!=Enemy.State.DEAD){
-            if(result<0.4 && result>-0.7 && screen.getIslander().getY()<=enemyBody.getPosition().y){
+
+            if(result<0.4 && result>-0.6 && screen.getIslander().getY()<=enemyBody.getPosition().y){
                 state=State.ATTACK;
             }else{
                 state=State.IDLE.RUNNING;
@@ -190,25 +201,31 @@ public class Orc extends Enemy {
 
             }
 
-            if(count>140){
+            if(count>140 && state!=State.ATTACK){
+                this.state=State.IDLE;
+                Vector2 vect=new Vector2(0,0);
+                enemyBody.setLinearVelocity(vect);
+                if(count==146 && result<2.5 && result>-2.5f){
+                    MGame.assetManager.get("orc_.mp3",Sound.class).play();
+                }
+
+            }
+
+            if(count>340){
                 count=0;
             }
         }
 
 
 
-
-        System.out.println(state);
-        //System.out.println(enemyBody.getPosition().x);
-
-
-
-
         if(destroy==false && state==State.DEAD ){
-            System.out.println("DEAD");
+
             world.destroyBody(enemyBody);
+            screen.getWorld().destroyBody(enemyBody);
             destroy=true;
+
             stateTime=0;
+
         }
 
 
@@ -227,8 +244,8 @@ public class Orc extends Enemy {
 
     }
 
-    public void setSt(State state){
-        this.state=state;
+    public void setSt(){
+        this.state=State.DEAD;
     }
 
 }

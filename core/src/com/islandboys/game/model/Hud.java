@@ -111,12 +111,16 @@ public class Hud extends Stage {
 
     public static void setLiveLevel(int v){
 
-        live+=v;
-        if(live==5){
-            live=0;
+        if(islander.getAlive()==true){
+            live+=v;
+            if(live>=4){
+                //live=0;
+                islander.setIsAlive();
+            }
         }
+
         islander.setLive(live);
-        System.out.println(islander.getLive());
+        //ystem.out.println(islander.getLive());
 
 
     }

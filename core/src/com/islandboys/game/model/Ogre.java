@@ -179,6 +179,13 @@ public class Ogre extends Enemy {
 
     }
 
+
+
+    @Override
+    public State getState() {
+        return state;
+    }
+
     @Override
     public void draw(Batch batch) {
         if(state!=State.DEAD||stateTime<0.2f ){

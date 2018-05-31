@@ -70,7 +70,7 @@ public class PlayScreen implements Screen{
 
     //temporarios
 
-     private HellDog dog;
+    private HellDog dog;
 
 
     public PlayScreen(MGame game){
@@ -129,6 +129,8 @@ public class PlayScreen implements Screen{
         return islander;
     }
 
+
+
     public void input(float delta){
 
         if(control.isRightPressed())
@@ -163,29 +165,27 @@ public class PlayScreen implements Screen{
     }
 
 
-    public void update(float delta){
-
-        input(delta);
-        attackInput(delta);
-        islander.update(delta);
+    public void updateEnemy(float delta){
         dog.update(delta);
-
-
 
         for(Enemy ogre:worldCreator.getOgres()){
             ogre.update(delta);
+            islander.contacEnemy(ogre);
         }
 
         for(Enemy sk:worldCreator.getSkeletons()){
             sk.update(delta);
+            islander.contacEnemy(sk);
         }
 
         for(Enemy orc:worldCreator.getOrcs()){
             orc.update(delta);
+            islander.contacEnemy(orc);
         }
 
         for(Enemy und:worldCreator.getUndeads()){
             und.update(delta);
+            islander.undeadVsislander((Undead) und);
         }
 
         for(Enemy dog:worldCreator.getHelldog()){
@@ -201,14 +201,11 @@ public class PlayScreen implements Screen{
                 removeArrows.add(arrow);
             }
 
-            if(arrow.contacEnemy(dog)) {
-                dog.setSt(Enemy.State.DEAD);
-            }
 
             for(Enemy ogre:worldCreator.getOgres()){
-                 if(arrow.contacEnemy(ogre)) {
-                     ogre.setState(Enemy.State.DEAD);
-                 }
+                if(arrow.contacEnemy(ogre)) {
+                    ogre.setState(Enemy.State.DEAD);
+                }
             }
 
             for(Enemy sk:worldCreator.getSkeletons()){
@@ -219,7 +216,7 @@ public class PlayScreen implements Screen{
 
             for(Orc orcs:worldCreator.getOrcs()){
                 if(arrow.contacEnemy(orcs)) {
-                    orcs.setSt(Enemy.State.DEAD);
+                    orcs.setSt();
                 }
             }
 
@@ -235,10 +232,7 @@ public class PlayScreen implements Screen{
                 }
             }
 
-
-
         }
-
 
 
         islander.getArrows().removeAll(removeArrows);
@@ -249,6 +243,18 @@ public class PlayScreen implements Screen{
         for(Enemy flame:worldCreator.getFlames()){
             flame.update(delta);
         }
+
+
+    }
+
+
+    public void update(float delta){
+
+        input(delta);
+        attackInput(delta);
+        islander.update(delta);
+
+        updateEnemy(delta);
 
         world.step(1.2f/60f,6,2);
         islander.update(delta);
@@ -261,6 +267,8 @@ public class PlayScreen implements Screen{
         renderer.setView(gamecam);
 
     }
+
+
 
     public void drawEnemys(){
         for(Arrow arrow:islander.getArrows()){
@@ -296,11 +304,6 @@ public class PlayScreen implements Screen{
 
 
     @Override
-    public void show() {
-
-    }
-
-    @Override
     public void render(float delta) {
         update(delta);
 
@@ -308,7 +311,7 @@ public class PlayScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        box2DDebugRenderer.render(world,gamecam.combined);
+        //box2DDebugRenderer.render(world,gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
@@ -327,18 +330,24 @@ public class PlayScreen implements Screen{
         }
 
 
-
-
-
-
-
     }
+
 
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height,    true);
         hudgame.hudStage.getViewport().update(width, height);
         control.resize(width,height);
+
+    }
+
+    @Override
+    public void dispose() {
+        map.dispose();
+        world.dispose();
+        renderer.dispose();
+        box2DDebugRenderer.dispose();
+        hudgame.dispose();
 
     }
 
@@ -357,13 +366,12 @@ public class PlayScreen implements Screen{
 
     }
 
+
     @Override
-    public void dispose() {
-        map.dispose();
-        world.dispose();
-        renderer.dispose();
-        box2DDebugRenderer.dispose();
-        hudgame.dispose();
+    public void show() {
 
     }
+
+
+
 }

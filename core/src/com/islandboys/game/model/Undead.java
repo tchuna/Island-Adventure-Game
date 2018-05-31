@@ -170,20 +170,23 @@ public class Undead extends Enemy{
 
 
         if(state!=State.DEAD){
-            if(result<0.4 && result>-0.7 && screen.getIslander().getY()<=enemyBody.getPosition().y){
+
+            if(result<0.3f && result>-0.6 && screen.getIslander().getY()<=enemyBody.getPosition().y){
                 state=State.ATTACK;
+            }else if(result<2&& result>-2 ){
+                state=State.RUNNING;
             }else{
-                state=State.IDLE.RUNNING;
+                state=State.IDLE;
             }
 
-            if(count<70){
+            if(count<70 && state==State.RUNNING){
 
                 if(state==State.RUNNING){
                     Vector2 vect=new Vector2(0.5f,0);
                     enemyBody.setLinearVelocity(vect);
                 }
 
-            }else if(count>70){
+            }else if(count>70 && state==State.RUNNING){
                 if(state==State.RUNNING){
                     Vector2 vect=new Vector2(-0.5f,0);
                     enemyBody.setLinearVelocity(vect);
@@ -195,12 +198,6 @@ public class Undead extends Enemy{
                 count=0;
             }
         }
-
-
-
-
-        //System.out.println(screen.getIslander().getX());
-        //System.out.println(enemyBody.getPosition().x);
 
 
 
@@ -221,6 +218,11 @@ public class Undead extends Enemy{
     }
     public void setSt(State state){
         this.state=state;
+    }
+
+    @Override
+    public State getState() {
+        return state;
     }
 
     @Override

@@ -13,11 +13,13 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.islandboys.game.model.Bricks;
 import com.islandboys.game.model.Coins;
+import com.islandboys.game.model.Dor;
 import com.islandboys.game.model.Fire;
 import com.islandboys.game.model.Flame;
 import com.islandboys.game.model.GameInfo;
 import com.islandboys.game.model.HellDog;
 import com.islandboys.game.model.Hud;
+import com.islandboys.game.model.Key;
 import com.islandboys.game.model.Ogre;
 import com.islandboys.game.model.Orc;
 import com.islandboys.game.model.Skeleton;
@@ -107,6 +109,22 @@ public class Box2DWorldCreator {
             new Coins(screen, rect,hud);
 
         }
+
+        //key bdx
+        for (MapObject object : screen.getMap().getLayers().get(GameInfo.KEY).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Key(screen, rect,hud);
+
+        }
+
+        //dor bdx
+        for (MapObject object : screen.getMap().getLayers().get(GameInfo.DOR).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Dor(screen, rect,hud);
+
+        }
+
+
 
 
         //ogres bdx

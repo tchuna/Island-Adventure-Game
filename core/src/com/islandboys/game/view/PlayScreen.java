@@ -73,14 +73,14 @@ public class PlayScreen implements Screen{
     private HellDog dog;
 
 
-    public PlayScreen(MGame game){
+    public PlayScreen(MGame game,int level){
         this.game=game;
         gamecam = new OrthographicCamera();
         gamePort=new FitViewport(GameInfo.V_WIDTH/GameInfo.PIXEL_METER,GameInfo.V_HEIGHT/ GameInfo.PIXEL_METER,gamecam);
         stage=new Stage(gamePort);
 
         mapLoader=new TmxMapLoader();
-        map=mapLoader.load("level1.tmx");
+        map = mapLoader.load("level"+level+".tmx");
         renderer=new OrthogonalTiledMapRenderer(map,1/GameInfo.PIXEL_METER);
 
         gamecam.position.set(gamePort.getScreenWidth()/2,gamePort.getScreenHeight()/2,0);
@@ -311,7 +311,7 @@ public class PlayScreen implements Screen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        //box2DDebugRenderer.render(world,gamecam.combined);
+        box2DDebugRenderer.render(world,gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();

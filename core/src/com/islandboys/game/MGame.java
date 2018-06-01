@@ -30,6 +30,9 @@ public class MGame extends Game {
 	private SettingsScreen settingsScreen;
 	private SelectScreen selectScreen;
 
+
+    private int currentLevel=1;
+
 	public static AssetManager assetManager;
 	private boolean sontOn;
 
@@ -55,7 +58,7 @@ public class MGame extends Game {
   		assetManager.finishLoading();
 		this.sontOn=true;
 
-		this.playScreen=new PlayScreen(this);
+		this.playScreen=new PlayScreen(this,currentLevel);
 
 
 		setScreen(playScreen);
@@ -63,6 +66,20 @@ public class MGame extends Game {
 	}
 
 
+
+
+    public void setToPlayScreen(){
+        playScreen = new PlayScreen(this, currentLevel);
+        setScreen(playScreen);
+    }
+
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
+    }
 
 
 

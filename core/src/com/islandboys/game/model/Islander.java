@@ -29,6 +29,9 @@ public class Islander extends Sprite {
     private Texture fail;
     private TextureRegion standImage;
     private int countHurt = 0;
+
+
+
     private boolean key=false;
 
 
@@ -93,12 +96,20 @@ public class Islander extends Sprite {
         return this.numWeapon;
     }
 
+    public void setKey() {
+        this.key = true;
+    }
+
     public boolean getAlive() {
         return this.isAlive;
     }
 
     public int getCoins() {
         return this.coins;
+    }
+
+    public boolean getKey(){
+        return key;
     }
 
 
@@ -264,7 +275,7 @@ public class Islander extends Sprite {
         fdef.filter.categoryBits = GameInfo.ISLANDER_BIT;
 
         fdef.filter.maskBits = GameInfo.BRICKS_BIT | GameInfo.COINS_BIT | GameInfo.FIRE_BIT |
-                GameInfo.SPIKE_BIT | GameInfo.GROUND_BIT | GameInfo.ENEMY_BIT;
+                GameInfo.SPIKE_BIT | GameInfo.GROUND_BIT | GameInfo.ENEMY_BIT|GameInfo.KEY_BIT|GameInfo.DOR_BIT;
 
         fdef.shape = shape;
         body.createFixture(fdef);

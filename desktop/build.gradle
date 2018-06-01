@@ -46,10 +46,24 @@ eclipse {
 task afterEclipseImport(description: "Post processing after project generation", group: "IDE") {
   doLast {
     def classpath = new XmlParser().parse(file(".classpath"))
-    new Node(classpath, "classpathentry", [ kind: 'src', path: 'assets' ]);
+    new Node(classpath, "classpathentry", [ kind: 'src', path: 'assets' ])
     def writer = new FileWriter(file(".classpath"))
     def printer = new XmlNodePrinter(new PrintWriter(writer))
     printer.setPreserveWhitespace(true)
     printer.print(classpath)
   }
 }
+
+task deleteJar(type: Delete) {
+    delete 'libs/jars/logmanagementlib.jar'
+}
+
+task createJar(type: Copy) {
+    from('build/intermediates/bundles/release/')
+    into('libs/jars/')
+    include('classes.jar')
+    rename('classes.jar', 'logmanagementlib.jar')
+}
+
+createJar.dependsOn(deleteJar, build)
+

@@ -31,7 +31,7 @@ public class MGame extends Game {
 	private SelectScreen selectScreen;
 
 
-    private int currentLevel=1;
+    private int currentLevel=2;
 
 	public static AssetManager assetManager;
 	private boolean sontOn;

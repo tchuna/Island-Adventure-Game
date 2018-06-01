@@ -64,7 +64,7 @@ public class Skeleton extends Enemy{
     protected void creatSprite(PolygonShape shape) {
         stateTime=0;
 
-        idle=new Texture("idle_S.png");
+        idle=new Texture("a.png");
         run=new Texture("run_S.png");
         attack=new Texture("attack_S.png");
         dead=new Texture("dead_S.png");

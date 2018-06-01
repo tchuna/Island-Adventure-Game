@@ -34,7 +34,7 @@ public class Flame extends Enemy {
         shape.setAsBox(8/GameInfo.PIXEL_METER,7/GameInfo.PIXEL_METER);
         fdef.filter.categoryBits=GameInfo.ENEMY_BIT;
 
-        fdef.filter.maskBits=GameInfo.GROUND_BIT|GameInfo.ISLANDER_BIT|GameInfo.ENEMY_BIT;
+        fdef.filter.maskBits=GameInfo.GROUND_BIT|GameInfo.ISLANDER_BIT|GameInfo.ENEMY_BIT|GameInfo.FIRE_BIT;
 
         fdef.shape=shape;
         enemyBody.createFixture(fdef);

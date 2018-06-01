@@ -136,7 +136,6 @@ idea {
     }
 }
 
-
 task deleteJar(type: Delete) {
     delete 'libs/jars/logmanagementlib.jar'
 }

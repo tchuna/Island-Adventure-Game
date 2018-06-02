@@ -51,7 +51,7 @@ public class Skeleton extends Enemy{
         width=12/GameInfo.PIXEL_METER;
         heigth=13/GameInfo.PIXEL_METER;
 
-        fdef.filter.maskBits=GameInfo.GROUND_BIT|GameInfo.ISLANDER_BIT|GameInfo.ENEMY_BIT;
+        fdef.filter.maskBits=GameInfo.GROUND_BIT;
 
         fdef.shape=shape;
         enemyBody.createFixture(fdef);

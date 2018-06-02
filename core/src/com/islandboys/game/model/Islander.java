@@ -19,6 +19,7 @@ import org.omg.CORBA.UNKNOWN;
 import java.util.ArrayList;
 
 public class Islander extends Sprite {
+
     public enum State {IDLE, JUMPING, RUNNING, FALLING, DEAD}
 
 
@@ -29,6 +30,11 @@ public class Islander extends Sprite {
     private Texture fail;
     private TextureRegion standImage;
     private int countHurt = 0;
+
+
+
+    private boolean win=false;
+    private int  time=0;
 
 
 
@@ -52,7 +58,7 @@ public class Islander extends Sprite {
     public boolean isInAir;
 
     private boolean isAlive = true;
-    private int numWeapon = 5;
+    private int numWeapon = 8;
     private int live = 0;
     private int coins = 0;
     private int score = 0;
@@ -83,6 +89,15 @@ public class Islander extends Sprite {
 
     }
 
+
+
+    public boolean getWin() {
+        return win;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
+    }
 
     public ArrayList<Arrow> getArrows() {
         return arrows;
@@ -129,7 +144,7 @@ public class Islander extends Sprite {
     }
 
     public void setCoins(int coins) {
-        this.coins = coins;
+        this.coins += coins;
     }
 
     public void setLive(int live) {
@@ -143,6 +158,10 @@ public class Islander extends Sprite {
         }
     }
 
+    public void setWeapon(int weapon){
+        this.numWeapon=weapon;
+    }
+
 
     public void setIsAlive() {
         this.isAlive = false;
@@ -152,6 +171,10 @@ public class Islander extends Sprite {
     public void setScoree(int score) {
         this.score = score;
 
+    }
+
+    public void incLive(int v) {
+        this.live+=v;
     }
 
 
@@ -251,6 +274,15 @@ public class Islander extends Sprite {
         setPosition(body.getPosition().x - getWidth() / 2.2f, (body.getPosition().y - getHeight() / 3f));
         setRegion(getFrames(delta));
 
+        if(this.getY()<0){
+            this.setIsAlive();
+        }
+        if(this.getLive()>=4){
+            this.setIsAlive();
+        }
+
+
+
     }
 
     public void defineIslander() {
@@ -275,7 +307,7 @@ public class Islander extends Sprite {
         fdef.filter.categoryBits = GameInfo.ISLANDER_BIT;
 
         fdef.filter.maskBits = GameInfo.BRICKS_BIT | GameInfo.COINS_BIT | GameInfo.FIRE_BIT |
-                GameInfo.SPIKE_BIT | GameInfo.GROUND_BIT | GameInfo.ENEMY_BIT|GameInfo.KEY_BIT|GameInfo.DOR_BIT;
+                GameInfo.SPIKE_BIT | GameInfo.GROUND_BIT |GameInfo.KEY_BIT|GameInfo.DOR_BIT;
 
         fdef.shape = shape;
         body.createFixture(fdef);

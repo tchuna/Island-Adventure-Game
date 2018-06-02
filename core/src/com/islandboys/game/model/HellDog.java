@@ -51,7 +51,7 @@ public class HellDog extends Enemy {
         heigth=(int)(12/GameInfo.PIXEL_METER);//altura
 
 
-        fdef.filter.maskBits=GameInfo.GROUND_BIT|GameInfo.ISLANDER_BIT|GameInfo.ENEMY_BIT;
+        fdef.filter.maskBits=GameInfo.GROUND_BIT;
 
         fdef.shape=shape;
         enemyBody.createFixture(fdef);

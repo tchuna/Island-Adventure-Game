@@ -56,7 +56,7 @@ public class Orc extends Enemy {
         heigth=21 / GameInfo.PIXEL_METER;
 
 
-        fdef.filter.maskBits = GameInfo.GROUND_BIT | GameInfo.ISLANDER_BIT | GameInfo.ENEMY_BIT;
+        fdef.filter.maskBits = GameInfo.GROUND_BIT ;
         fdef.restitution=1f;
         fdef.shape = shape;
         enemyBody.createFixture(fdef);
@@ -220,11 +220,12 @@ public class Orc extends Enemy {
 
         if(destroy==false && state==State.DEAD ){
 
-            world.destroyBody(enemyBody);
+            // world.destroyBody(enemyBody);
             screen.getWorld().destroyBody(enemyBody);
-            destroy=true;
 
+            destroy=true;
             stateTime=0;
+            //this.getEnemyBody().setLinearVelocity(0,20000);
 
         }
 

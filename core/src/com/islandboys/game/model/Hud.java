@@ -111,23 +111,17 @@ public class Hud extends Stage {
 
     public static void setLiveLevel(int v){
 
-        if(islander.getAlive()==true){
-            live+=v;
-            if(live>=4){
-                //live=0;
-                islander.setIsAlive();
-            }
-        }
 
-        islander.setLive(live);
-        //ystem.out.println(islander.getLive());
+        if(islander.getAlive()==true){
+            islander.incLive(v);
+        }
 
 
     }
     public static void  setScore(int v){
 
-        score+=v;
-        islander.setCoins(score);
+        //score+=v;
+        islander.setCoins(v);
         scoreLabel.setText(String.format("%03d",islander.getCoins()));
     }
 
@@ -144,7 +138,10 @@ public class Hud extends Stage {
     public void draw(){
         super.draw();
         batch.begin();
-        batch.draw(liveLevel.get(islander.getLive()),Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*95/100), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*13.6f/100),Gdx.graphics.getWidth()*25/100,Gdx.graphics.getHeight()*13.6f/100);
+        if(islander.getLive()<=4){
+            batch.draw(liveLevel.get(islander.getLive()),Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*95/100), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*13.6f/100),Gdx.graphics.getWidth()*25/100,Gdx.graphics.getHeight()*13.6f/100);
+        }
+
         batch.draw(islander_T,Gdx.graphics.getWidth()*7/1000, Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*105/1000),Gdx.graphics.getWidth()*56/1000,Gdx.graphics.getHeight()*94/1000);
         batch.draw(scoreCoin_T,Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*688/1000), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*11/100),Gdx.graphics.getWidth()*52/1000,Gdx.graphics.getHeight()*94/1000);
         batch.draw(weapon_T,Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*475/1000), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*1615/10000),Gdx.graphics.getWidth()*900/10000,Gdx.graphics.getHeight()*200/1000);

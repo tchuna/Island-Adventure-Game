@@ -1,6 +1,7 @@
 package com.islandboys.game.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -16,175 +17,75 @@ import com.islandboys.game.MGame;
 
 
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.islandboys.game.MGame;
+import com.islandboys.game.model.GameInfo;
+
+
 public class MenuScreen implements Screen {
+    private Viewport viewport;
+    private Stage stage;
 
     private MGame game;
-    private Viewport gamePort;
-    private Texture menuBackground;
-    private Stage menuStage;
-
-    private Image playB;
-    private Image exitB;
-    private Image scoreB;
-    private Image settingsB;
-
-    private float xPositionB;
-    private float yPositionB;
-    private float hPositionB;
-    private float wPositionB;
-
-
-
-
 
     public MenuScreen(MGame game){
-        this.game=game;
+        this.game = game;
+        viewport = new FitViewport(GameInfo.V_WIDTH, GameInfo.V_HEIGHT, new OrthographicCamera());
+        stage = new Stage(viewport, MGame.batch);
 
-        gamePort=new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        gamePort.apply();
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 
-        menuStage=new Stage(gamePort,game.batch);
-        menuBackground=new Texture("menu.png");
+        Table table = new Table();
+        table.center();
+        table.setFillParent(true);
 
+        Label gameOverLabel = new Label("PLAY", font);
+        Label playAgainLabel = new Label("Click to Play GAME", font);
+        Label playEntAgainLabel = new Label("Press ENTER", font);
 
-        setupButtons();
-        inputListener();
+        table.add(gameOverLabel).expandX();
+        table.row();
+        table.add(playAgainLabel).expandX().padTop(10f);
+        table.row();
+        table.add(playEntAgainLabel).expandX().padTop(10f);
 
+        stage.addActor(table);
     }
-
-
-    public void setupButtons(){
-
-        hPositionB=Gdx.graphics.getHeight()*32/100;
-        wPositionB=Gdx.graphics.getWidth()*19/100;
-        xPositionB=Gdx.graphics.getWidth()*20/100;
-        yPositionB=Gdx.graphics.getHeight()*4/100;
-
-        playB=new Image(menuBackground);
-        playB.setHeight(hPositionB);
-        playB.setWidth(wPositionB);
-        playB.setPosition(xPositionB,yPositionB);
-
-        xPositionB=Gdx.graphics.getWidth()*43/100;
-
-
-        scoreB=new Image(menuBackground);
-        scoreB.setHeight(hPositionB);
-        scoreB.setWidth(wPositionB);
-        scoreB.setPosition(xPositionB,yPositionB);
-
-        xPositionB=Gdx.graphics.getWidth()*66/100;
-
-        settingsB=new Image(menuBackground);
-        settingsB.setHeight(hPositionB);
-        settingsB.setWidth(wPositionB);
-        settingsB.setPosition(xPositionB,yPositionB);
-
-
-        hPositionB=Gdx.graphics.getHeight()*11/100;
-        wPositionB=Gdx.graphics.getWidth()*7/100;
-        xPositionB=Gdx.graphics.getWidth()*93/100;
-        yPositionB=Gdx.graphics.getHeight()*89/100;
-
-        exitB=new Image(menuBackground);
-        exitB.setHeight(hPositionB);
-        exitB.setWidth(wPositionB);
-        exitB.setPosition(xPositionB,yPositionB);
-
-
-
-
-    }
-
-
-    public void setSettingsScreen(){
-        game.changeScreen(3);
-
-    }
-
-
-    public void setScoreScreen(){
-        game.changeScreen(2);
-
-    }
-
-
-    public void setSelectcreen(){
-        game.changeScreen(1);
-
-    }
-
-
-    public void inputListener(){
-
-        Gdx.input.setInputProcessor(menuStage);
-        menuStage.addActor(playB);
-        menuStage.addActor(scoreB);
-        menuStage.addActor(settingsB);
-        menuStage.addActor(exitB);
-
-
-        playB.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                setSelectcreen();
-
-            }
-        });
-
-        scoreB.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                setScoreScreen();
-
-            }
-        });
-
-
-        settingsB.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                setSettingsScreen();
-
-            }
-        });
-
-        exitB.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y){
-                Gdx.app.exit();
-
-            }
-        });
-
-
-    }
-
-
-
-
-
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(menuStage);
+
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1,0,0,1);
+        if(Gdx.input.justTouched()) {
+            game.setPlayScreen();
+            dispose();
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
+            game.setScreen(new PlayScreen((MGame) game,((MGame) game).getCurrentLevel()));
+            dispose();
+        }
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.begin();
-        game.batch.draw(menuBackground,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        game.batch.end();
-       // menuStage.draw();
-
-
+        stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        gamePort.update(width,height);
 
     }
 
@@ -205,6 +106,6 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }

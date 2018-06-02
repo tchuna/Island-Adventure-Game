@@ -75,7 +75,7 @@ public class Arrow extends Sprite {
 
 
     public boolean contacEnemy(Enemy enemy){
-        if(destroy==false){
+        if(destroy==false && enemy.getState()!= Enemy.State.DEAD){
             if(x<enemy.getEnemyBody().getPosition().x+enemy.getW() && y<enemy.getEnemyBody().getPosition().y+enemy.getH()
                     && x+w >enemy.getEnemyBody().getPosition().x
                     && y+h>enemy.getEnemyBody().getPosition().y){

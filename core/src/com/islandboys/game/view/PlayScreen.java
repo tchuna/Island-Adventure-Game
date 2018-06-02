@@ -67,14 +67,14 @@ public class PlayScreen implements Screen{
     private Music coinSong;
 
     private Controller control;
+    private int gameLevel;
 
-    //temporarios
 
-    private HellDog dog;
 
 
     public PlayScreen(MGame game,int level){
         this.game=game;
+        this.gameLevel=level;
         gamecam = new OrthographicCamera();
         gamePort=new FitViewport(GameInfo.V_WIDTH/GameInfo.PIXEL_METER,GameInfo.V_HEIGHT/ GameInfo.PIXEL_METER,gamecam);
         stage=new Stage(gamePort);
@@ -94,20 +94,20 @@ public class PlayScreen implements Screen{
         world.setContactListener(contacListener);
 
 
-        music= game.assetManager.get("song.wav",Music.class);
+        switch (level){
+            case 1:music= game.assetManager.get("lev1.mp3",Music.class);break;
+            case 2:music= game.assetManager.get("lev2.mp3",Music.class);break;
+            case 3:music= game.assetManager.get("lev3.mp3",Music.class);break;
+
+        }
         music.setLooping(true);
-        //music.play();
+        music.play();
         music.setVolume(0.05f);
 
         hudgame=new Hud(game.batch,islander);
 
 
         this.control=new Controller();
-
-
-        ///temporarios
-
-        dog=new HellDog(this,.32f,.32f);
 
 
     }
@@ -166,7 +166,7 @@ public class PlayScreen implements Screen{
 
 
     public void updateEnemy(float delta){
-        dog.update(delta);
+        //dog.update(delta);
 
         for(Enemy ogre:worldCreator.getOgres()){
             ogre.update(delta);
@@ -205,12 +205,14 @@ public class PlayScreen implements Screen{
             for(Enemy ogre:worldCreator.getOgres()){
                 if(arrow.contacEnemy(ogre)) {
                     ogre.setState(Enemy.State.DEAD);
+
                 }
             }
 
             for(Enemy sk:worldCreator.getSkeletons()){
                 if(arrow.contacEnemy(sk)) {
                     sk.setState(Enemy.State.DEAD);
+                    sk.setPosition(-20,-20);
                 }
             }
 
@@ -250,6 +252,22 @@ public class PlayScreen implements Screen{
 
     public void update(float delta){
 
+
+        if(islander.getWin()==true && gameLevel<3){
+            gameLevel+=1;
+            music.stop();
+            game.changeScreen(new PlayScreen(game,gameLevel));
+            game.setCurentLevel(gameLevel);
+        }else if(islander.getWin()==true && gameLevel==3){
+            game.changeScreen(new WinScreen(game));
+        }
+
+
+
+        if(islander.getAlive()==false ){
+            game.changeScreen(new GameOverScreen(game));
+        }
+
         input(delta);
         attackInput(delta);
         islander.update(delta);
@@ -260,11 +278,11 @@ public class PlayScreen implements Screen{
         islander.update(delta);
         hudgame.update(delta);
 
-        gamecam.position.x=islander.getBody().getPosition().x;
-
+        gamecam.position.x=(islander.getBody().getPosition().x);
 
         gamecam.update();
         renderer.setView(gamecam);
+
 
     }
 
@@ -316,7 +334,7 @@ public class PlayScreen implements Screen{
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         islander.draw(game.batch);
-        dog.draw(game.batch);
+
         drawEnemys();
 
         game.batch.end();
@@ -348,6 +366,7 @@ public class PlayScreen implements Screen{
         renderer.dispose();
         box2DDebugRenderer.dispose();
         hudgame.dispose();
+        this.dispose();
 
     }
 

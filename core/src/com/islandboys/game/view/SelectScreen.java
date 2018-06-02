@@ -31,7 +31,7 @@ public class SelectScreen implements Screen{
 
     public SelectScreen(MGame game){
         this.game=game;
-        this.selectBackground=new Texture("bmenu.png");
+        this.selectBackground=new Texture("mira.png");
         gamePort=new FitViewport(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         gamePort.apply();
         selectStage=new Stage(gamePort,game.batch);

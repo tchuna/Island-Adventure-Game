@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
@@ -19,6 +20,7 @@ public class Controller {
     Viewport viewport;
     Stage stage;
     boolean upPressed, downPressed, leftPressed, rightPressed,spacePressed;
+    public boolean press;
     OrthographicCamera cam;
 
     public Controller(){
@@ -68,6 +70,19 @@ public class Controller {
         });
 
         Gdx.input.setInputProcessor(stage);
+
+        Image atcimag = new Image(new Texture("mira.png"));
+        atcimag.setSize(40, 40);
+
+       atcimag.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                press=true;
+                System.out.println("You clicked an image...");
+            }
+        });
+
+       press=false;
 
         Image upImg = new Image(new Texture("up.png"));
         upImg.setSize(50, 50);
@@ -134,11 +149,14 @@ public class Controller {
         });
 
 
-        leftImg.setBounds(0,70,leftImg.getWidth(),leftImg.getHeight());
-        rightImg.setBounds(90,70,rightImg.getWidth(),rightImg.getHeight());
+        leftImg.setBounds(0,60,leftImg.getWidth(),leftImg.getHeight());
+        rightImg.setBounds(90,60,rightImg.getWidth(),rightImg.getHeight());
 
-        upImg.setBounds(445,70,upImg.getWidth(),upImg.getHeight());
+        upImg.setBounds(445,60,upImg.getWidth(),upImg.getHeight());
 
+        atcimag.setBounds(450,120,atcimag.getWidth(),atcimag.getHeight());
+
+        stage.addActor(atcimag);
         stage.addActor(leftImg);
         stage.addActor(rightImg);
         stage.addActor(upImg);

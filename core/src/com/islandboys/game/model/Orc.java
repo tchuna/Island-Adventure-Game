@@ -1,5 +1,6 @@
 package com.islandboys.game.model;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -56,7 +57,7 @@ public class Orc extends Enemy {
         heigth=21 / GameInfo.PIXEL_METER;
 
 
-        fdef.filter.maskBits = GameInfo.GROUND_BIT ;
+        fdef.filter.maskBits = GameInfo.GROUND_BIT | GameInfo.BRICKS_BIT;
         fdef.restitution=1f;
         fdef.shape = shape;
         enemyBody.createFixture(fdef);

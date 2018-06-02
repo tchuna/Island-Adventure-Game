@@ -68,6 +68,7 @@ public class PlayScreen implements Screen{
 
     private Controller control;
     private int gameLevel;
+    private boolean press=false;
 
 
 
@@ -142,8 +143,17 @@ public class PlayScreen implements Screen{
         if (control.isUpPressed() && islander.getBody().getLinearVelocity().y == 0)
             islander.getBody().applyLinearImpulse(new Vector2(0, 4f), islander.getBody().getWorldCenter(), true);
 
-        else  if(control.isSpacePressed()){
-            islander.shoot();
+        else  if(control.press){
+
+            if (islander.getNumWeapon() > 0) {
+
+
+                MGame.assetManager.get("attack.wav", Sound.class).play();
+                hudgame.setWeaponn();
+                islander.shoot();
+                control.press=false;
+
+            }
         }
 
 
@@ -259,6 +269,7 @@ public class PlayScreen implements Screen{
             game.changeScreen(new PlayScreen(game,gameLevel));
             game.setCurentLevel(gameLevel);
         }else if(islander.getWin()==true && gameLevel==3){
+            music.stop();
             game.changeScreen(new WinScreen(game));
         }
 
@@ -348,6 +359,7 @@ public class PlayScreen implements Screen{
         }
 
 
+        control.draw();
     }
 
 

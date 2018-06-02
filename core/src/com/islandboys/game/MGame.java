@@ -1,36 +1,22 @@
 package com.islandboys.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.islandboys.game.view.GameOverScreen;
 import com.islandboys.game.view.MenuScreen;
 import com.islandboys.game.view.PlayScreen;
 import com.islandboys.game.view.ScoreScreen;
-import com.islandboys.game.view.SelectScreen;
-import com.islandboys.game.view.SettingsScreen;
-import com.uwsoft.editor.renderer.SceneLoader;
-
-import java.awt.Menu;
 
 public class MGame extends Game {
 
 	public static SpriteBatch batch;
 	public MenuScreen menu ;
-
 	public PlayScreen playScreen;
 	public ScoreScreen scoreScreen;
-	public SettingsScreen settingsScreen;
-	public SelectScreen selectScreen;
+
 
 
     private int currentLevel=1;
@@ -77,21 +63,6 @@ public class MGame extends Game {
         this.currentLevel = currentLevel;
     }
 
-
-
-	public void changeScreen(int option){
-
-		switch (option){
-			case 1 : setScreen(selectScreen);break;
-			case 2 : setScreen(scoreScreen);break;
-			case 3 : setScreen(settingsScreen);break;
-			case 4 : setScreen(menu);break;
-			case 5 : setScreen(playScreen);break;
-			case 6 :System.out.println("thunaaa");
-		}
-
-
-	}
 
 	@Override
 	public void render () {

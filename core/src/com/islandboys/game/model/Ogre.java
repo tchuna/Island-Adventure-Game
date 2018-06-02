@@ -50,7 +50,7 @@ public class Ogre extends Enemy {
         width=9/GameInfo.PIXEL_METER;
         heigth=14.8f/GameInfo.PIXEL_METER;
 
-        fdef.filter.maskBits=GameInfo.GROUND_BIT;
+        fdef.filter.maskBits=GameInfo.GROUND_BIT| GameInfo.BRICKS_BIT;
 
         fdef.shape=shape;
         enemyBody.createFixture(fdef);

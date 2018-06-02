@@ -144,7 +144,7 @@ task createJar(type: Copy) {
     from('build/intermediates/bundles/release/')
     into('libs/jars/')
     include('classes.jar')
-    rename('classes.jar', 'logmanagementlib.jar')
+    rename('classes.jar', 'game.jar')
 }
 
 createJar.dependsOn(deleteJar, build)

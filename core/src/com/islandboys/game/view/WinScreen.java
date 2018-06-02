@@ -33,7 +33,7 @@ public class WinScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-    Label gameOverLabel = new Label(" The Island is safe Now (YOU WIN)", font);
+    Label gameOverLabel = new Label(" The Island is safe Now (YOU WON)", font);
         Label playAgainLabel = new Label("Click to Play Again", font);
         Label playEntAgainLabel = new Label("Press ENTER", font);
 
@@ -57,9 +57,9 @@ public class WinScreen implements Screen {
             game.setScreen(new PlayScreen((MGame) game,1));
             dispose();
         }
-        
+
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)){
-            game.setScreen(new PlayScreen((MGame) game,((MGame) game).getCurrentLevel()));
+            game.setScreen(new PlayScreen((MGame) game,1));
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);

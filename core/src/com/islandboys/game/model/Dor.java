@@ -19,14 +19,11 @@ public class Dor extends InteractiveTileObject {
 
     @Override
     public void  onContactBodys() {
-        Gdx.app.log("DOR","DOR");
+
+
         if(screen.getIslander().getKey()){
             setCategoryFilter(GameInfo.DESTROED_BIT);
             screen.getIslander().setWin(true);
-            System.out.println("Opendorr");
-        }else{
-
-            System.out.println("closedorr");
         }
 
 

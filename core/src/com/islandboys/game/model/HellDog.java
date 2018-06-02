@@ -174,7 +174,6 @@ public class HellDog extends Enemy {
 
 
         if(destroy==false && state==State.DEAD ){
-            System.out.println("DEAD");
             world.destroyBody(enemyBody);
             destroy=true;
             stateTime=0;

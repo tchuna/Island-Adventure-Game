@@ -377,7 +377,6 @@ public class Islander extends Sprite {
             if(enemy.getState()!= Enemy.State.DEAD) {
                 if (result < 0.4 && result > -0.6 && screen.getIslander().getY() <= enemy.getEnemyBody().getPosition().y) {
                     countHurt++;
-                    System.out.println("Kileeeeeeed");
                     if (countHurt == 42) {
                         live++;
                         countHurt = 0;
@@ -404,7 +403,6 @@ public class Islander extends Sprite {
             if(enemy.getState()!= Enemy.State.DEAD) {
                 if (result < 0.3 && result > -0.6 && screen.getIslander().getY() <= enemy.getEnemyBody().getPosition().y) {
                     countHurt++;
-                    System.out.println("Kileeeeeeed");
                     if (countHurt == 50) {
                         live++;
                         countHurt = 0;
@@ -431,7 +429,6 @@ public class Islander extends Sprite {
             if(enemy.getState()!= Enemy.State.DEAD){
                 if (result < 0.4 && result > -0.7 && screen.getIslander().getY() <= enemy.getEnemyBody().getPosition().y) {
                     countHurt++;
-                    System.out.println("Kileeeeeeed");
                     if (countHurt == 40) {
                         live++;
                         countHurt = 0;

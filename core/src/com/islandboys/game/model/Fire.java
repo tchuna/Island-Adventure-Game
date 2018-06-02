@@ -28,7 +28,6 @@ public class Fire extends  InteractiveTileObject {
         if(counthurt>20){
             counthurt=0;
         }
-        Gdx.app.log("Fire","Co");
         hud.setLiveLevel(1);
         MGame.assetManager.get("hurt.wav",Sound.class).play();
 

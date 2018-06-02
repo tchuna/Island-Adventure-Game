@@ -79,7 +79,6 @@ public class Arrow extends Sprite {
             if(x<enemy.getEnemyBody().getPosition().x+enemy.getW() && y<enemy.getEnemyBody().getPosition().y+enemy.getH()
                     && x+w >enemy.getEnemyBody().getPosition().x
                     && y+h>enemy.getEnemyBody().getPosition().y){
-                System.out.println("Enemy Dead");
                 destroy=true;
                 return  true;
             }

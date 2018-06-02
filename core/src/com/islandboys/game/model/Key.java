@@ -22,7 +22,7 @@ public class Key extends InteractiveTileObject {
 
     @Override
     public void  onContactBodys() {
-        Gdx.app.log("Key","KEY");
+        MGame.assetManager.get("key_s.wav",Sound.class).play();
         setCategoryFilter(GameInfo.DESTROED_BIT);
         screen.getIslander().setKey();
         getCell().setTile(null);

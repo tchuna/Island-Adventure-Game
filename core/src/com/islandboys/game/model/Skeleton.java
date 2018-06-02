@@ -218,14 +218,7 @@ public class Skeleton extends Enemy{
 
 
 
-       //System.out.println(screen.getIslander().getX());
-        //System.out.println(enemyBody.getPosition().x);
-
-
-
-
         if(destroy==false && state==State.DEAD ){
-            System.out.println("DEAD");
             world.destroyBody(enemyBody);
             destroy=true;
             stateTime=0;

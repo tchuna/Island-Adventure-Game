@@ -45,6 +45,8 @@ public class MGame extends Game {
 		assetManager.load("lev2.mp3",Music.class);
 		assetManager.load("lev3.mp3",Music.class);
 		assetManager.load("sk.mp3",Sound.class);
+		assetManager.load("key_s.wav",Sound.class);
+
 
   		assetManager.finishLoading();
 		this.sontOn=true;

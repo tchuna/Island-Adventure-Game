@@ -44,8 +44,6 @@ public class Box2DWorldCreator {
 
     public Box2DWorldCreator(PlayScreen screen,Hud hud ) {
         this.hud=hud;
-        World world=screen.getWorld();
-        TiledMap map=screen.getMap();
         CreatGroundBody(screen.getWorld(),screen.getMap());
         createBodys(screen);
 

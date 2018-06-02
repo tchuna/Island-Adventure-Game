@@ -23,13 +23,10 @@ public class Hud extends Stage {
     private OrthographicCamera camera;
     private SpriteBatch batch;
 
-    private Image pauseButton;
     private Array<Texture>liveLevel;
     private Texture scoreCoin_T,weapon_T,time_T,islander_T;
 
     private float timeCount=0;
-    private static int score=0;
-    private static int live=0;
     private static int weapon=5;
     private int worldTime=0;
 
@@ -120,7 +117,6 @@ public class Hud extends Stage {
     }
     public static void  setScore(int v){
 
-        //score+=v;
         islander.setCoins(v);
         scoreLabel.setText(String.format("%03d",islander.getCoins()));
     }
@@ -128,7 +124,6 @@ public class Hud extends Stage {
     public static void setWeaponn(){
         islander.setNumWeapon(1);
         weapon=islander.getNumWeapon();
-        //weapon=weapon-1;
         weaponLabel.setText(String.format("%02d",weapon));
 
     }

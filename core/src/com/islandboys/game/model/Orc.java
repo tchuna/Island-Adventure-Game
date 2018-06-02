@@ -221,12 +221,9 @@ public class Orc extends Enemy {
 
         if(destroy==false && state==State.DEAD ){
 
-            // world.destroyBody(enemyBody);
             screen.getWorld().destroyBody(enemyBody);
-
             destroy=true;
             stateTime=0;
-            //this.getEnemyBody().setLinearVelocity(0,20000);
 
         }
 

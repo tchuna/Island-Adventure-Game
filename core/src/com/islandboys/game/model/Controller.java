@@ -78,7 +78,6 @@ public class Controller {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 press=true;
-                System.out.println("You clicked an image...");
             }
         });
 

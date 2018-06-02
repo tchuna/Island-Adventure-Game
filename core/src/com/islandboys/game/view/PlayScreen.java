@@ -295,6 +295,7 @@ public class PlayScreen implements Screen{
         renderer.setView(gamecam);
 
 
+
     }
 
 
@@ -334,13 +335,14 @@ public class PlayScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        update(delta);
 
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        box2DDebugRenderer.render(world,gamecam.combined);
+        update(Gdx.graphics.getDeltaTime());
+
+        //box2DDebugRenderer.render(world,gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
@@ -359,7 +361,6 @@ public class PlayScreen implements Screen{
         }
 
 
-        control.draw();
     }
 
 

@@ -23,7 +23,7 @@ public class Coins extends InteractiveTileObject {
 
     @Override
     public void  onContactBodys() {
-        Gdx.app.log("Coins","Coins");
+
         MGame.assetManager.get("coin.wav",Sound.class).play();
         setCategoryFilter(GameInfo.DESTROED_BIT);
         hud.setScore(1);

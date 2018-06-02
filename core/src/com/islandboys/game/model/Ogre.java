@@ -17,10 +17,6 @@ import com.islandboys.game.view.PlayScreen;
 
 public class Ogre extends Enemy {
     private float stateTime;
-    private float waltTime;
-    private float idleTime;
-    private float timeCount;
-
 
     private Animation idleAnimation;
     private Animation walkAnimation;

@@ -47,7 +47,7 @@ Tive sobrecarga de trabalho por ter desenvolvido o projecto sozinho.
 ## Manual de Utilização
 
 ![A](/screen/screen1.png)
- ###Pressiona a tela do ecra (SmartPhone)  ou a Tecla Enter para iniciar o jogo .*<br><br>
+ ** Pressiona a tela do ecra (SmartPhone)  ou a Tecla Enter para iniciar o jogo .<br><br>
  
  
  ![A](/screen/left.png)

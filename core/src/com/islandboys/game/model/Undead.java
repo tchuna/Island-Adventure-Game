@@ -87,7 +87,7 @@ public class Undead extends Enemy{
         frames.clear();
 
         for(int i=0;i<20;i++){
-            frames.add(new TextureRegion(run,i*56f,0,56f,48));
+            frames.add(new TextureRegion(run,i*56,0,56,48));
         }
         runAnimation=new Animation(0.09f,frames);
         frames.clear();

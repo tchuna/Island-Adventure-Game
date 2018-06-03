@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="415">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextobjectid="418">
  <tileset firstgid="1" name="s" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="3850" columns="70">
   <image source="s.png" width="1274" height="997"/>
  </tileset>
@@ -155,12 +155,13 @@
  </objectgroup>
  <objectgroup name="Skeleton">
   <object id="334" x="2192" y="160" width="16" height="16"/>
+  <object id="415" x="1072" y="160" width="16" height="16"/>
+  <object id="417" x="3696" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Orcs">
   <object id="320" x="3008" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Undeads">
-  <object id="322" x="1008" y="160" width="16" height="16"/>
   <object id="414" x="1184" y="160" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Helldog">

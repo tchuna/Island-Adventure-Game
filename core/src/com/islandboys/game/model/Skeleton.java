@@ -214,6 +214,7 @@ public class Skeleton extends Enemy{
         if(state!=State.DEAD){
             if(result<0.4 && result>-0.7 && screen.getIslander().getY()<=enemyBody.getPosition().y){
                 state=State.ATTACK;
+
             }else{
                 state=State.IDLE.RUNNING;
             }
@@ -243,6 +244,7 @@ public class Skeleton extends Enemy{
 
         if(destroy==false && state==State.DEAD ){
             world.destroyBody(enemyBody);
+            MGame.assetManager.get("sk.mp3",Sound.class).play();
             destroy=true;
             stateTime=0;
         }

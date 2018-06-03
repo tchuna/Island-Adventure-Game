@@ -95,7 +95,7 @@ public class PlayScreen implements Screen{
         }
         music.setLooping(true);
         music.play();
-        music.setVolume(0.05f);
+        music.setVolume(0.2f);
 
         hudgame=new Hud(game.batch,islander);
 

@@ -13,6 +13,10 @@ import com.badlogic.gdx.utils.Array;
 import com.islandboys.game.MGame;
 import com.islandboys.game.view.PlayScreen;
 
+
+/**
+ * HellDog Class in game
+ */
 public class HellDog extends Enemy {
 
     private float stateTime;
@@ -25,6 +29,12 @@ public class HellDog extends Enemy {
     State state;
     int count=0;
 
+    /**
+     * HellDog Constructor
+     * @param  screen
+     * @param x_position
+     * @param y_position
+     */
     public HellDog(PlayScreen screen, float x_position, float y_position) {
         super(screen, x_position, y_position);
     }
@@ -32,6 +42,12 @@ public class HellDog extends Enemy {
 
 
 
+
+    /**
+     * method to define the characteristics the  HellDog
+     * @param x_position
+     * @param y_position
+     */
     @Override
     protected void defineEnemyBody(float x_position, float y_position) {
         this.state=State.RUNNING;
@@ -61,6 +77,10 @@ public class HellDog extends Enemy {
 
 
 
+    /**
+     * Create the HellDog sprite
+     * @param shape
+     */
     protected void creatSprite(PolygonShape shape) {
         stateTime=0;
 
@@ -87,6 +107,11 @@ public class HellDog extends Enemy {
     }
 
 
+
+    /**
+     * Get Frame images from the sprite
+     * @param delta
+     */
     public TextureRegion getFrames(float delta){
 
         TextureRegion region=new TextureRegion();
@@ -117,6 +142,11 @@ public class HellDog extends Enemy {
     }
 
 
+
+
+    /**
+     * Set Frame images from the sprite
+     */
     public  void spritePosition(){
 
         if(State.IDLE==state){
@@ -130,11 +160,22 @@ public class HellDog extends Enemy {
 
     }
 
+
+    /**
+     * Set HellDog state
+     * @param state
+     */
     public void setSt(State state){
         this.state=state;
     }
 
 
+
+
+    /**
+     * update flame state
+     * @param delta
+     */
     @Override
     public void update(float delta) {
 

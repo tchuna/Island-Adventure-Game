@@ -7,8 +7,17 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.islandboys.game.MGame;
 import com.islandboys.game.view.PlayScreen;
 
+/**
+ * Spike Class in game
+ */
 public class Spike extends InteractiveTileObject {
     private int counthurt=0;
+    /**
+     *  Spike  constructor
+     *  @param screen
+     *  @param rect
+     *  @param hud
+     */
     public Spike(PlayScreen screen, com.badlogic.gdx.math.Rectangle rect, Hud hud){
         super(screen,rect,hud);
         fixture.setUserData(this);
@@ -17,6 +26,9 @@ public class Spike extends InteractiveTileObject {
     }
 
 
+    /**
+     * Check if the islander touch the spike
+     */
     @Override
     public void onContactBodys() {
         counthurt++;

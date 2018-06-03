@@ -7,9 +7,20 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.islandboys.game.MGame;
 import com.islandboys.game.view.PlayScreen;
 
+
+/**
+ *  Fire class in game
+ */
 public class Fire extends  InteractiveTileObject {
 
     private int counthurt=0;
+
+    /**
+     *  Fire  constructor
+     *  @param screen
+     *  @param rect
+     *  @param hud
+     */
     public Fire(PlayScreen screen, com.badlogic.gdx.math.Rectangle rect, Hud hud){
         super(screen,rect,hud);
         fixture.setUserData(this);
@@ -18,6 +29,10 @@ public class Fire extends  InteractiveTileObject {
     }
 
 
+
+    /**
+     * Check if the islander  touched the fire
+     */
     @Override
     public void onContactBodys() {
         counthurt++;

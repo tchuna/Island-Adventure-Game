@@ -1,7 +1,6 @@
 package com.islandboys.game.view;
 
 import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -10,23 +9,14 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
 import com.islandboys.game.controller.Box2DWorldCreator;
@@ -34,18 +24,19 @@ import com.islandboys.game.controller.WorldContactListener;
 import com.islandboys.game.model.Arrow;
 import com.islandboys.game.model.Controller;
 import com.islandboys.game.model.Enemy;
-import com.islandboys.game.model.Flame;
 import com.islandboys.game.model.GameInfo;
 import com.islandboys.game.model.HellDog;
 import com.islandboys.game.model.Hud;
 import com.islandboys.game.model.Islander;
-import com.islandboys.game.model.Ogre;
 import com.islandboys.game.model.Orc;
-import com.islandboys.game.model.Skeleton;
 import com.islandboys.game.model.Undead;
 
 import java.util.ArrayList;
 
+
+/**
+ * PlayScreen Class
+ */
 public class PlayScreen implements Screen{
     private MGame game;
     private Hud hudgame;
@@ -64,15 +55,16 @@ public class PlayScreen implements Screen{
     private WorldContactListener contacListener;
 
     private Music music;
-    private Music coinSong;
 
     private Controller control;
     private int gameLevel;
-    private boolean press=false;
 
 
-
-
+    /**
+     * PlayScreen Constructor
+     *@param game
+     * @param level
+     */
     public PlayScreen(MGame game,int level){
         this.game=game;
         this.gameLevel=level;
@@ -132,6 +124,10 @@ public class PlayScreen implements Screen{
 
 
 
+    /**
+     *input
+     *@param delta
+     */
     public void input(float delta){
 
         if(control.isRightPressed())
@@ -160,6 +156,11 @@ public class PlayScreen implements Screen{
 
     }
 
+
+    /**
+     * The attack input
+     * @param delta
+     */
     public void attackInput(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 
@@ -175,6 +176,11 @@ public class PlayScreen implements Screen{
     }
 
 
+
+    /**
+     * Update the enemy-s state in current GameScreen
+     *@param delta
+     */
     public void updateEnemy(float delta){
         //dog.update(delta);
 
@@ -260,6 +266,11 @@ public class PlayScreen implements Screen{
     }
 
 
+
+    /**
+     * Update the PlayScreen
+     *@param delta
+     */
     public void update(float delta){
 
 
@@ -300,6 +311,11 @@ public class PlayScreen implements Screen{
 
 
 
+
+    /**
+     * Draw enemy-s in PlayScreen
+     *
+     */
     public void drawEnemys(){
         for(Arrow arrow:islander.getArrows()){
             arrow.render(game.batch);
@@ -333,6 +349,11 @@ public class PlayScreen implements Screen{
     }
 
 
+
+
+    /**
+     * PlayScreen render method
+     */
     @Override
     public void render(float delta) {
 

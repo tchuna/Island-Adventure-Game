@@ -8,6 +8,10 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import com.islandboys.game.view.PlayScreen;
 
+/**
+ *  Class Arrow  in  the Game
+ *
+ */
 public class Arrow extends Sprite {
 
     private float stateTime;
@@ -22,6 +26,14 @@ public class Arrow extends Sprite {
     private float h,w;
 
 
+
+    /**
+     * Arrow Constructor
+     * @param screen
+     * @param x_position
+     * @param y_position
+     * @param isRigth
+     */
     public Arrow(PlayScreen screen, float x_position, float y_position,boolean isRigth) {
 
         this.stateTime=0;
@@ -40,6 +52,11 @@ public class Arrow extends Sprite {
     }
 
 
+
+    /**
+     * flip Image Sprite
+     *
+     */
     public void flipSprite(){
         if(fireRight && sprite.isFlipX()){
             sprite.flip(true,false);
@@ -51,10 +68,20 @@ public class Arrow extends Sprite {
     }
 
 
+    /**
+     * Get  the destroy variable
+     * @return destroy
+     */
     public boolean getDestroy() {
         return destroy;
     }
 
+
+
+    /**
+     * Update the Arrow state
+     * @param  delta
+     */
     public void update(float delta){
         if(x>endSprite){
             destroy=true;
@@ -69,11 +96,21 @@ public class Arrow extends Sprite {
 
     }
 
+
+    /**
+     * Render the Arrow sprite image
+     * @param batch
+     */
     public void render(SpriteBatch batch){
         batch.draw(sprite,x,y,w,h);
     }
 
 
+
+    /**
+     * Check if the arrow reached the enemy
+     * @param  enemy
+     */
     public boolean contacEnemy(Enemy enemy){
         if(destroy==false && enemy.getState()!= Enemy.State.DEAD){
             if(x<enemy.getEnemyBody().getPosition().x+enemy.getW() && y<enemy.getEnemyBody().getPosition().y+enemy.getH()

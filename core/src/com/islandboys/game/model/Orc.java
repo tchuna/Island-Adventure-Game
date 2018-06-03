@@ -16,6 +16,10 @@ import com.islandboys.game.view.PlayScreen;
 
 import java.util.ArrayList;
 
+
+/**
+ * Orc Class in the game
+ */
 public class Orc extends Enemy {
 
     private float stateTime;
@@ -27,6 +31,14 @@ public class Orc extends Enemy {
 
     int count = 0;
 
+
+
+    /**
+     * Orc Constructor
+     * @param  screen
+     * @param x_position
+     * @param y_position
+     */
     public Orc(PlayScreen screen, float x_position, float y_position) {
         super(screen, x_position, y_position);
 
@@ -34,11 +46,21 @@ public class Orc extends Enemy {
 
 
 
+    /**
+     * Get Orc State
+     * @return state
+     */
     @Override
     public State getState() {
         return state;
     }
 
+
+    /**
+     * method to define the characteristics the  Orc
+     * @param x_position
+     * @param y_position
+     */
     @Override
     protected void defineEnemyBody(float x_position, float y_position) {
         this.state = State.RUNNING;
@@ -67,6 +89,10 @@ public class Orc extends Enemy {
     }
 
 
+
+    /**
+     * create a Orc Sprite
+     */
     protected void creatSprite(PolygonShape shape) {
         stateTime = 0;
 
@@ -110,6 +136,10 @@ public class Orc extends Enemy {
     }
 
 
+    /**
+     * Get Frame images from the sprite
+     * @param delta
+     */
     public TextureRegion getFrames(float delta) {
 
         TextureRegion region=new TextureRegion();
@@ -150,6 +180,10 @@ public class Orc extends Enemy {
 
     }
 
+
+    /**
+     * Orc sprite position in a body
+     */
     public  void spritePosition(){
 
         if (Enemy.State.IDLE == state) {
@@ -171,6 +205,11 @@ public class Orc extends Enemy {
     }
 
 
+
+    /**
+     *Update Orc State
+     * @param delta
+     */
     @Override
     public void update(float delta) {
 
@@ -234,6 +273,11 @@ public class Orc extends Enemy {
 
     }
 
+
+    /**
+     * draw Orc in game
+     * @param batch
+     */
     @Override
     public void draw(Batch batch) {
         if(state!=State.DEAD || stateTime<1.5f){
@@ -243,6 +287,9 @@ public class Orc extends Enemy {
 
     }
 
+    /**
+     * Set Orc state
+     */
     public void setSt(){
         this.state=State.DEAD;
     }

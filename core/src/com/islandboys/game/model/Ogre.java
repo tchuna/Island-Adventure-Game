@@ -15,6 +15,9 @@ import com.islandboys.game.MGame;
 import com.islandboys.game.view.PlayScreen;
 
 
+/**
+ * Ogre Class in the game
+ */
 public class Ogre extends Enemy {
     private float stateTime;
 
@@ -26,10 +29,22 @@ public class Ogre extends Enemy {
     private PolygonShape shape;
 
 
+    /**
+     * Ogre Constructor
+     * @param  screen
+     * @param x_position
+     * @param y_position
+     */
     public Ogre(PlayScreen screen, float x_position, float y_position) {
         super(screen, x_position, y_position);
     }
 
+
+    /**
+     * method to define the characteristics the  Ogre
+     * @param x_position
+     * @param y_position
+     */
     @Override
     protected void defineEnemyBody(float x_position,float y_position) {
         state=State.IDLE;
@@ -59,6 +74,11 @@ public class Ogre extends Enemy {
 
 
 
+
+    /**
+     * Get Frame images from the sprite
+     * @param delta
+     */
     public TextureRegion getFrames(float delta){
 
         TextureRegion region;
@@ -82,6 +102,10 @@ public class Ogre extends Enemy {
 
 
 
+    /**
+     * Create the Ogre sprite
+     * @param shape
+     */
     protected void creatSprite(PolygonShape shape) {
         stateTime=0;
         idle=new Texture("idle_O.png");
@@ -113,6 +137,11 @@ public class Ogre extends Enemy {
 
 
 
+
+    /**
+     * Update Ogre State
+     * @param delta
+     */
     public void update(float delta){
         stateTime+=delta;
 
@@ -177,11 +206,22 @@ public class Ogre extends Enemy {
 
 
 
+
+    /**
+     * Get Ogre State
+     * @return state
+     */
     @Override
     public State getState() {
         return state;
     }
 
+
+
+    /**
+     * draw method
+     * @param batch
+     */
     @Override
     public void draw(Batch batch) {
         if(state!=State.DEAD||stateTime<0.2f ){

@@ -16,12 +16,21 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
 import com.islandboys.game.model.GameInfo;
 
+
+/**
+ * WinScreen Class
+ */
 public class WinScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
 
     private Game game;
 
+
+    /**
+     * WinScreen Constructor
+     *@param game
+     */
     public WinScreen(Game game){
         this.game = game;
         viewport = new FitViewport(GameInfo.V_WIDTH, GameInfo.V_HEIGHT, new OrthographicCamera());

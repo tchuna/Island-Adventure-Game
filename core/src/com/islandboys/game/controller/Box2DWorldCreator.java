@@ -29,6 +29,11 @@ import com.islandboys.game.view.PlayScreen;
 
 import javax.swing.KeyStroke;
 
+
+/**
+ * Box2DWorldCreator Class
+ *
+ */
 public class Box2DWorldCreator {
 
     protected  Hud hud;
@@ -42,6 +47,11 @@ public class Box2DWorldCreator {
     private Array<HellDog>dog;
 
 
+    /**
+     *  Box2DWorldCreator  Constructor
+     * @param screen
+     * @param hud
+     */
     public Box2DWorldCreator(PlayScreen screen,Hud hud ) {
         this.hud=hud;
         CreatGroundBody(screen.getWorld(),screen.getMap());
@@ -50,6 +60,12 @@ public class Box2DWorldCreator {
 
     }
 
+
+    /**
+     *  Ground Creator
+     * @param world
+     * @param map
+     */
     public void CreatGroundBody(World world, TiledMap map){
 
         BodyDef bdef = new BodyDef();
@@ -76,6 +92,10 @@ public class Box2DWorldCreator {
 
 
 
+    /**
+     *  Body-s Creator in the game world
+     * @param screen
+     */
     public void createBodys(PlayScreen screen) {
 
         //plat bdx
@@ -183,26 +203,55 @@ public class Box2DWorldCreator {
 
     }
 
+    /**
+     *  Get ogres in the game world
+     *  @return ogres
+     */
     public Array<Ogre> getOgres() {
         return ogres;
     }
 
+
+    /**
+     *  Get flames in the game world
+     *  @return flames
+     */
     public Array<Flame> getFlames() {
         return flames;
     }
 
+
+    /**
+     *  Get Skeletons in the game world
+     *  @return skeletons
+     */
     public Array<Skeleton> getSkeletons() {
         return skeletons;
     }
 
+
+    /**
+     *  Get orcs in the game world
+     *  @return orcs
+     */
     public Array<Orc> getOrcs() {
         return orcs;
     }
 
+
+    /**
+     *  Get Undead in the game world
+     *  @return undead
+     */
     public Array<Undead> getUndeads() {
         return undeads;
     }
 
+
+    /**
+     *  Get helldogs in the game world
+     *  @return dog
+     */
     public Array<HellDog> getHelldog() {
         return dog;
     }

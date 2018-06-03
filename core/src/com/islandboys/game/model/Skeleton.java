@@ -14,7 +14,9 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.islandboys.game.MGame;
 import com.islandboys.game.view.PlayScreen;
-
+/**
+ * Skeleton Class in the game
+ */
 public class Skeleton extends Enemy{
 
     private float stateTime;
@@ -26,6 +28,12 @@ public class Skeleton extends Enemy{
 
     int count=0;
 
+    /**
+     * Skeleton Constructor
+     * @param  screen
+     * @param x_position
+     * @param y_position
+     */
     public Skeleton(PlayScreen screen, float x_position, float y_position) {
         super(screen, x_position, y_position);
     }
@@ -33,6 +41,11 @@ public class Skeleton extends Enemy{
 
 
 
+    /**
+     * method to define the characteristics the  Skeleton
+     * @param x_position
+     * @param y_position
+     */
     @Override
     protected void defineEnemyBody(float x_position, float y_position) {
         state= State.RUNNING;
@@ -60,7 +73,9 @@ public class Skeleton extends Enemy{
     }
 
 
-
+    /**
+     * create a Skeleton Sprite
+     */
     protected void creatSprite(PolygonShape shape) {
         stateTime=0;
 
@@ -105,7 +120,10 @@ public class Skeleton extends Enemy{
 
     }
 
-
+    /**
+     * Get Frame images from the sprite
+     * @param delta
+     */
     public TextureRegion getFrames(float delta){
         TextureRegion region=new TextureRegion();
 
@@ -150,7 +168,9 @@ public class Skeleton extends Enemy{
 
     }
 
-
+    /**
+     * Orc sprite position in a body
+     */
     public  void spritePosition(){
         if(Enemy.State.IDLE==state && directionRigh==true){
             setPosition(enemyBody.getPosition().x-getWidth()/3f,(enemyBody.getPosition().y-getHeight()/2.9f));
@@ -179,7 +199,10 @@ public class Skeleton extends Enemy{
 
     }
 
-
+    /**
+     * Update Skeleton State
+     * @param delta
+     */
     @Override
     public void update(float delta) {
         stateTime+=delta;
@@ -236,11 +259,20 @@ public class Skeleton extends Enemy{
     }
 
 
+    /**
+     * get Skeleton  state
+     * @return state
+     */
     @Override
     public State getState() {
         return state;
     }
 
+
+    /**
+     * draw method
+     * @param
+     */
    @Override
     public void draw(Batch batch) {
         if(state!=State.DEAD || stateTime<1.5f){

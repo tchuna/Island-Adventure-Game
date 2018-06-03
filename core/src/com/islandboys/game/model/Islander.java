@@ -18,6 +18,11 @@ import org.omg.CORBA.UNKNOWN;
 
 import java.util.ArrayList;
 
+
+/**
+ * Islander Class
+ *
+ */
 public class Islander extends Sprite {
 
     public enum State {IDLE, JUMPING, RUNNING, FALLING, DEAD}
@@ -28,15 +33,11 @@ public class Islander extends Sprite {
     private Texture jump;
     private Texture running;
     private Texture fail;
-    private TextureRegion standImage;
     private int countHurt = 0;
 
 
 
     private boolean win=false;
-    private int  time=0;
-
-
 
     private boolean key=false;
 
@@ -66,6 +67,10 @@ public class Islander extends Sprite {
     private float heigth;
 
 
+    /**
+     * Islander Constructor
+     * @param screen
+     */
     public Islander(PlayScreen screen) {
         this.world = screen.getWorld();
         this.screen = screen;
@@ -91,66 +96,133 @@ public class Islander extends Sprite {
 
 
 
+    /**
+     * Get win variable
+     * @return  win
+     */
     public boolean getWin() {
         return win;
     }
 
+    /**
+     * Set win variable
+     * @param  win
+     */
     public void setWin(boolean win) {
         this.win = win;
     }
 
+    /**
+     * Get arrows variable
+     * @return  arrows
+     */
     public ArrayList<Arrow> getArrows() {
         return arrows;
     }
 
+
+    /**
+     * Get live variable
+     * @return  live
+     */
     public int getLive() {
         return this.live;
     }
 
+
+    /**
+     * Get numWeapon variable
+     * @return  numWeapon
+     */
     public int getNumWeapon() {
         return this.numWeapon;
     }
 
+
+    /**
+     * Set key variable
+     */
     public void setKey() {
         this.key = true;
     }
 
+    /**
+     * Get isAlive variable
+     * @return  isAlive
+     */
     public boolean getAlive() {
         return this.isAlive;
     }
 
+
+    /**
+     * Get coins variable
+     * @return  coins
+     */
     public int getCoins() {
         return this.coins;
     }
 
+
+    /**
+     * Get key variable
+     * @return  key
+     */
     public boolean getKey(){
         return key;
     }
 
 
+
+    /**
+     * add new arrow in arrows variable
+     */
     public void shoot() {
         arrows.add(new Arrow(screen, this.getX(), this.getY(), this.getDirectionRigh()));
     }
 
 
+    /**
+     * Get world variable
+     * @return  world
+     */
     public World getWorld() {
         return world;
     }
 
     private World world;
 
+    /**
+     * Get body variable
+     * @return  body
+     */
     public Body getBody() {
         return body;
     }
 
+
+    /**
+     * Set coins variable
+     * @param  coins
+     */
     public void setCoins(int coins) {
         this.coins += coins;
     }
 
+
+    /**
+     * Set live variable
+     * @param   live
+     */
     public void setLive(int live) {
         this.live = live;
     }
 
+
+    /**
+     * Set weapon variable
+     * @return  weapon
+     */
     public void setNumWeapon(int weapon) {
         this.numWeapon -= weapon;
         if (numWeapon <= 0) {
@@ -174,10 +246,17 @@ public class Islander extends Sprite {
     }
 
     public void incLive(int v) {
+
         this.live+=v;
+        if(live>=4){
+            isAlive=false;
+        }
     }
 
 
+    /**
+     * Create the Islander sprite
+     */
     public void createSprites() {
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
@@ -215,6 +294,10 @@ public class Islander extends Sprite {
     }
 
 
+    /**
+     * Get Frame images from the sprite
+     * @param delta
+     */
     public TextureRegion getFrames(float delta) {
 
         TextureRegion region;
@@ -254,6 +337,9 @@ public class Islander extends Sprite {
     }
 
 
+    /**
+     * Get Islander state
+     */
     public State getState() {
         if (body.getLinearVelocity().y > 0 || (body.getLinearVelocity().y < 0 && previousState == State.JUMPING)) {
             return State.JUMPING;
@@ -285,6 +371,11 @@ public class Islander extends Sprite {
 
     }
 
+
+    /**
+     * method to define the characteristics the  islander
+     *
+     */
     public void defineIslander() {
         BodyDef bdf = new BodyDef();
         bdf.position.set(200 / GameInfo.PIXEL_METER, 48 / GameInfo.PIXEL_METER);
@@ -296,6 +387,10 @@ public class Islander extends Sprite {
     }
 
 
+    /**
+     * the islander contact sensors
+     *
+     */
     public void contactSensore() {
 
         FixtureDef fdef = new FixtureDef();
@@ -342,7 +437,11 @@ public class Islander extends Sprite {
 
 
 
-    public boolean orcVsislander(Orc enemy) {
+    /**
+     * Orc Vs Islander method
+     *@param enemy
+     */
+    public void orcVsislander(Orc enemy) {
 
         float result = this.getX() - enemy.getEnemyBody().getPosition().x;
 
@@ -359,17 +458,18 @@ public class Islander extends Sprite {
                     if (live >= 4) {
                         isAlive = false;
                     }
-
-                    return true;
                 }
             }
 
         }
-        return false;
     }
 
 
-    public boolean ogreVsislander(Ogre enemy) {
+    /**
+     * Ogre Vs Islander method
+     *@param enemy
+     */
+    public void ogreVsislander(Ogre enemy) {
 
         float result = this.getX() - enemy.getEnemyBody().getPosition().x;
 
@@ -386,16 +486,19 @@ public class Islander extends Sprite {
                         isAlive = false;
                     }
 
-                    return true;
                 }
             }
 
         }
-        return false;
+
     }
 
 
-    public boolean undeadVsislander(Undead enemy) {
+    /**
+     * Undead Vs Islander method
+     *@param enemy
+     */
+    public void  undeadVsislander(Undead enemy) {
 
         float result = this.getX() - enemy.getEnemyBody().getPosition().x;
 
@@ -411,17 +514,18 @@ public class Islander extends Sprite {
                     if (live >= 4) {
                         isAlive = false;
                     }
-
-                    return true;
                 }
             }
 
         }
-        return false;
     }
 
 
-    public boolean skeletondVsislander(Skeleton enemy) {
+    /**
+     * Skeleton  Vs Islander method
+     *@param enemy
+     */
+    public void  skeletondVsislander(Skeleton enemy) {
 
         float result = this.getX() - enemy.getEnemyBody().getPosition().x;
 
@@ -438,18 +542,20 @@ public class Islander extends Sprite {
                         isAlive = false;
                     }
 
-                    return true;
                 }
             }
 
 
         }
-        return false;
     }
 
 
 
 
+    /**
+     * Contact islander and enemy-s
+     *@param enemy
+     */
     public void contacEnemy(Enemy enemy){
 
         if (enemy instanceof Ogre){
@@ -464,6 +570,11 @@ public class Islander extends Sprite {
 
     }
 
+
+    /**
+     * Get directionRight variable
+     *@return directionRight
+     */
     public boolean getDirectionRigh(){
         return directionRigh;
     }

@@ -9,6 +9,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.islandboys.game.view.PlayScreen;
 
+/**
+ * Flame Class in the game
+ */
+
 public class Flame extends Enemy {
     private float stateTime;
     private Animation flameAnimation;
@@ -17,10 +21,23 @@ public class Flame extends Enemy {
     private PolygonShape shape;
 
 
+
+    /**
+     * Flame Constructor
+     * @param  screen
+     * @param x_position
+     * @param y_position
+     */
     public Flame(PlayScreen screen, float x_position, float y_position) {
         super(screen, x_position, y_position);
     }
 
+
+    /**
+     * method to define the characteristics the  flame
+     * @param x_position
+     * @param y_position
+     */
     @Override
     protected void defineEnemyBody(float x_position, float y_position) {
         BodyDef bdf=new BodyDef();
@@ -44,6 +61,11 @@ public class Flame extends Enemy {
     }
 
 
+
+    /**
+     * Create the flame sprite
+     * @param shape
+     */
     protected void creatSprite(PolygonShape shape) {
         stateTime=0;
         flame=new Texture("fl.png");
@@ -60,6 +82,10 @@ public class Flame extends Enemy {
     }
 
 
+    /**
+     * Get Frame images from the sprite
+     * @param delta
+     */
     public TextureRegion getFrames(float delta){
 
         TextureRegion region;
@@ -71,6 +97,10 @@ public class Flame extends Enemy {
     }
 
 
+    /**
+     * update flame state
+     * @param delta
+     */
     @Override
     public void update(float delta) {
         stateTime+=delta;

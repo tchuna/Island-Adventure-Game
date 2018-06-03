@@ -8,14 +8,16 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.islandboys.game.view.MenuScreen;
 import com.islandboys.game.view.PlayScreen;
-import com.islandboys.game.view.ScoreScreen;
+
+/**
+ *Main Game Class
+ */
 
 public class MGame extends Game {
 
 	public static SpriteBatch batch;
 	public MenuScreen menu ;
 	public PlayScreen playScreen;
-	public ScoreScreen scoreScreen;
 
 
 
@@ -30,9 +32,6 @@ public class MGame extends Game {
 		batch = new SpriteBatch();
 
 		this.menu=new MenuScreen(this);
-
-		//this.scoreScreen=new ScoreScreen(this);
-		//this.settingsScreen=new SettingsScreen(this);
 
 		assetManager=new AssetManager();
 		assetManager.load("coin.wav", Sound.class);
@@ -94,9 +93,6 @@ public class MGame extends Game {
 		this.currentLevel = curentLevel;
 	}
 
-	public void setScoreMenu(){
-		setScreen(scoreScreen);
-	}
 	public void setPlayScreen(){
 		this.playScreen=new PlayScreen(this,currentLevel);
 		setScreen(playScreen);

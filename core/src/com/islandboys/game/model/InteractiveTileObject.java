@@ -14,6 +14,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.islandboys.game.view.PlayScreen;
 
 
+
+/**
+ * Abstract Class InteractiveTileObject in Game
+ */
 public abstract class InteractiveTileObject {
     protected World world;
     protected TiledMap map;
@@ -24,6 +28,13 @@ public abstract class InteractiveTileObject {
     protected Fixture fixture;
 
 
+
+    /**
+     * InteractiveTileObject Constructor
+     * @param screen
+     * @param rect
+     * @param hud
+     */
     public InteractiveTileObject(PlayScreen screen, com.badlogic.gdx.math.Rectangle rect, Hud hud){
         this.world=screen.getWorld();
         this.map=screen.getMap();
@@ -51,6 +62,10 @@ public abstract class InteractiveTileObject {
 
 
 
+    /**
+     * Set filter Bit
+     * @param filterBIt
+     */
     public void setCategoryFilter(short filterBIt){
         Filter filter =new Filter();
         filter.categoryBits=filterBIt;
@@ -59,6 +74,11 @@ public abstract class InteractiveTileObject {
 
     }
 
+
+    /**
+     * Get Tile Cell
+     * @return tile
+     */
     public TiledMapTileLayer.Cell getCell(){
 
         TiledMapTileLayer layer=(TiledMapTileLayer) map.getLayers().get(1);

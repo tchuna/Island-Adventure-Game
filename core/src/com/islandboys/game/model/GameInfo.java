@@ -5,13 +5,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
 
+
+/**
+ * Class GameInfo
+ */
 public class GameInfo implements Disposable {
-
-
 
     public static final int WIDTH=800;
     public static final int HEIGHT=480;
-
     public static final int C_WIDTH=500;
     public static final int C_HEIGHT=300;
 

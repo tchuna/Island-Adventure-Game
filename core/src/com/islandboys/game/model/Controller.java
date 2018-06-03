@@ -15,6 +15,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
 
+
+/**
+ *  Class Controller
+ *
+ */
 public class Controller {
 
     Viewport viewport;
@@ -23,6 +28,11 @@ public class Controller {
     public boolean press;
     OrthographicCamera cam;
 
+
+    /**
+     *  Controller Constructor
+     *
+     */
     public Controller(){
         cam = new OrthographicCamera();
         viewport = new FitViewport(GameInfo.C_WIDTH,GameInfo.C_HEIGHT, cam);
@@ -162,29 +172,42 @@ public class Controller {
 
     }
 
+    /**
+     *  draw the controller in the game
+     *
+     */
     public void draw(){
         stage.draw();
     }
 
+    /**
+     *  Get upPressed variable
+     *  @return upPressed
+     */
     public boolean isUpPressed() {
         return upPressed;
     }
 
-    public boolean isDownPressed() {
-        return downPressed;
-    }
-
+    /**
+     *  Get leftPressed variable
+     *  @return leftPressed
+     */
     public boolean isLeftPressed() {
         return leftPressed;
     }
 
+    /**
+     *  Get rightPressed variable
+     *  @return rightPressed
+     */
     public boolean isRightPressed() {
         return rightPressed;
     }
 
-    public boolean isSpacePressed() { return spacePressed;}
 
-
+    /**
+     *  resize Controller images
+     */
     public void resize(int width, int height){
         viewport.update(width, height);
     }

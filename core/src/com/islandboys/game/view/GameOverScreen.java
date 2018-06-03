@@ -18,13 +18,20 @@ import com.islandboys.game.model.GameInfo;
 
 
 
-
+/**
+ *  GameOverScreen Class
+ */
 public class GameOverScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
 
     private Game game;
 
+
+    /**
+     * GameOverScreen Constructor
+     *@param game
+     */
     public GameOverScreen(Game game){
         this.game = game;
         viewport = new FitViewport(GameInfo.V_WIDTH, GameInfo.V_HEIGHT, new OrthographicCamera());

@@ -8,8 +8,19 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.islandboys.game.MGame;
 import com.islandboys.game.view.PlayScreen;
 
+
+/**
+ *  Class  for Coins  in the  Game
+ *
+ */
 public class Coins extends InteractiveTileObject {
     private Hud hud;
+    /**
+     * Coins constructor
+     *   @param screen
+     *  @param rect
+     *  @param hud
+     */
     public Coins(PlayScreen screen, com.badlogic.gdx.math.Rectangle rect, Hud hud){
         super(screen,rect,hud);
         fixture.setUserData(this);
@@ -21,6 +32,10 @@ public class Coins extends InteractiveTileObject {
 
 
 
+
+    /**
+     * Check if the islander catch coins
+     */
     @Override
     public void  onContactBodys() {
 

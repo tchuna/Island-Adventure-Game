@@ -16,6 +16,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.islandboys.game.MGame;
 
+/**
+ *Hud Class in game
+ */
+
 public class Hud extends Stage {
 
     public Stage hudStage;
@@ -37,6 +41,13 @@ public class Hud extends Stage {
 
     private static Islander islander;
 
+
+
+    /**
+     * Hud Constructor
+     * @param batch
+     * @param islander
+     */
     public Hud(SpriteBatch batch,Islander islander){
         camera=new OrthographicCamera() ;
         this.batch=batch;
@@ -58,6 +69,11 @@ public class Hud extends Stage {
 
 
 
+
+    /**
+     * update hud state
+     * @param delta
+     */
     public void update(float delta){
         timeCount+=delta;
         if(timeCount>=1){
@@ -71,6 +87,12 @@ public class Hud extends Stage {
     }
 
 
+
+
+    /**
+     * setup the hud labels
+     *
+     */
     public void setupHudLabels(){
 
         scoreLabel=new Label(String.format("%03d",islander.getCoins()),new Label.LabelStyle(new BitmapFont(), Color.BLACK));
@@ -96,6 +118,11 @@ public class Hud extends Stage {
     }
 
 
+
+
+    /**
+     * load live level images
+     */
     public void loadLiveLevel(){
         liveLevel=new Array<Texture>();
         liveLevel.add(new Texture("liveLevel_4.png"));
@@ -106,6 +133,12 @@ public class Hud extends Stage {
 
     }
 
+
+
+    /**
+     * set hud level
+     * @param v
+     */
     public static void setLiveLevel(int v){
 
 
@@ -115,12 +148,22 @@ public class Hud extends Stage {
 
 
     }
+
+    /**
+     * set num coins in hud
+     * @param v
+     */
     public static void  setScore(int v){
 
         islander.setCoins(v);
         scoreLabel.setText(String.format("%03d",islander.getCoins()));
     }
 
+
+    /**
+     * set num weapon  in hud
+     * @param
+     */
     public static void setWeaponn(){
         islander.setNumWeapon(1);
         weapon=islander.getNumWeapon();
@@ -128,8 +171,11 @@ public class Hud extends Stage {
 
     }
 
-    @Override
 
+    /**
+     * draw hud in game
+     */
+    @Override
     public void draw(){
         super.draw();
         batch.begin();
@@ -143,12 +189,6 @@ public class Hud extends Stage {
         batch.draw(time_T,Gdx.graphics.getWidth()-(Gdx.graphics.getWidth()*240/1000), Gdx.graphics.getHeight()-(Gdx.graphics.getHeight()*121/1000),Gdx.graphics.getWidth()*69/1000,Gdx.graphics.getHeight()*125/1000);
         batch.end();
 
-    }
-
-
-    public void calcScore(){
-        int score=(int)timeCount*islander.getCoins();
-        islander.setScoree(score);
     }
 
 

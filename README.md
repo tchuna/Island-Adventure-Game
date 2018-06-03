@@ -66,7 +66,7 @@ Tive sobrecarga de trabalho por ter desenvolvido o projecto sozinho.
  <br><br><br>
  
  
-  ### Pressiona a image icon  "Snipe" do ecra (SmartPhone)  ou a Tecla SPACE" do teclado  para Saltar 
+  ### Pressiona a image icon  "Snipe" do ecra (SmartPhone)  ou a Tecla SPACE" do teclado  para lançar flecha
  ![A](/screen/attack.png)
  <br><br><br>
 

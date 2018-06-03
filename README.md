@@ -69,6 +69,11 @@ Tive sobrecarga de trabalho por ter desenvolvido o projecto sozinho.
   ### Pressiona a image icon  "Snipe" do ecra (SmartPhone)  ou a Tecla SPACE" do teclado  para lançar flecha
  ![A](/screen/attack.png)
  <br><br><br>
+ 
+  ### Encontra a chave no jogo para transitar level 
+ ![A](/screen/key.png)
+ <br><br><br>
+
 
 
 

@@ -48,23 +48,27 @@ Tive sobrecarga de trabalho por ter desenvolvido o projecto sozinho.
 
  ### Pressiona a tela do ecra (SmartPhone)  ou a Tecla Enter para iniciar o jogo .
 ![A](/screen/screen1.png)
-<br><br><br>
- 
- 
- ![A](/screen/left.png)
- Pressiona a tela do ecra (SmartPhone)  ou a Tecla Enter para iniciar o jogo 
- 
- 
- ![A](/screen/right.png)
- ###Pressiona a tela do ecra (SmartPhone)  ou a Tecla Enter para iniciar o jogo 
- 
- 
- ![A](/screen/jump.png)
- **Pressiona a tela do ecra (SmartPhone)  ou a Tecla Enter para iniciar o jogo 
- 
- ![A](/screen/attack.png)
- **Pressiona a tela do ecra (SmartPhone)  ou a Tecla Enter para iniciar o jogo 
 
+ 
+ ### Pressiona a image icon  "Left" do ecra (SmartPhone)  ou a Tecla "LEFT" do teclado  para mover  para esquerda 
+ ![A](/screen/left.png)
+ <br><br><br>
+ 
+ 
+  ### Pressiona a image icon  "Right" do ecra (SmartPhone)  ou a Tecla "RIGHT" do teclado  para mover  para direita 
+ ![A](/screen/right.png)
+ <br><br><br>
+ 
+
+
+  ### Pressiona a image icon  "UP" do ecra (SmartPhone)  ou a Tecla "UP" do teclado  para Saltar 
+ ![A](/screen/jump.png)
+ <br><br><br>
+ 
+ 
+  ### Pressiona a image icon  "Snipe" do ecra (SmartPhone)  ou a Tecla SPACE" do teclado  para Saltar 
+ ![A](/screen/attack.png)
+ <br><br><br>
 
 
 

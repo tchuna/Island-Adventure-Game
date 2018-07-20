@@ -1,7 +1,7 @@
 #### Projects for the Object Oriented Programming  (MIEIC) 
 
 
-## Projecto final 
+## Projecto finallllll
 
 ### Doc Link 
 https://tchuna.github.io/LPOO1718_T4G13_Proj2/
@@ -19,7 +19,7 @@ https://en.wikipedia.org/wiki/Adventure_Island_(video_game)
 ### Instalação do Aplicativo
 -----
  A instalação e feita  através do ficheiro islander.apk entregue na pasta release para despositivos android,
-podendo ser jogado em múltiplas plataformas através do ficheiro game.jar na mesma pasta..*<br><br>
+podendo ser jogado em múltiplas plataformas atraves do ficheiro game.jar na mesma pasta..*<br><br>
 
 ### Dificuldades
 -----

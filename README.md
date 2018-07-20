@@ -1,7 +1,8 @@
 #### Projects for the Object Oriented Programming  (MIEIC) 
 
 
-## Projecto finallllll
+## Projecto final
+
 
 ### Doc Link 
 https://tchuna.github.io/LPOO1718_T4G13_Proj2/

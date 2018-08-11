@@ -5,7 +5,7 @@
 
 
 ### Doc Link 
-https://tchuna.github.io/LPOO1718_T4G13_Proj2/
+https://tchuna.github.io/LGame_Proj/
 
 
 ### Adventures In Sal Island

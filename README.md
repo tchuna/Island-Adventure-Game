@@ -8,30 +8,8 @@ Jogo de aventura.
 
 ### Instalação do Aplicativo
 -----
- A instalação e feita  através do ficheiro islander.apk entregue na pasta release para despositivos android,
+ A instalação e feita  através do ficheiro islander.apk na pasta release para despositivos android,
 podendo ser jogado em múltiplas plataformas atraves do ficheiro game.jar na mesma pasta..*<br><br>
-
-### Dificuldades
------
- Em geral  tive  dificuldades  ao longo do desenvolvimento deste projeto na utilização  e compreensão do Libgdx por ter sido a primeira vez.
-Tive sobrecarga de trabalho por ter desenvolvido o projecto sozinho.
-*<br>
-
-### Distribuiçao de Tarefas
------
-. **Elgner Ramos (100%)**<br>
- Implementação de todas as funcionalidades do jogo . 
-
-### Tempo de Trabalho
------
- Aproximadamente 110 horas.* <br> <br>
-
-### Conclusão
------
- O projeto  foi desafiante e  contribuiu para o desenvolvimento das minhas  capacidades, no estudo autodidato e, principalmente, na aprendizagem da linguagem programação Java e como desenvolver jogos utilizando Libgdx  .*<br><br>
-
-
-
 
 
 ## Manual de Utilização
